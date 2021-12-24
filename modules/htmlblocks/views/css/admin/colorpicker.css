@@ -1,0 +1,159 @@
+/* HTML Blocks Prestashop Module
+ * Copyright 2015, Prestaddons
+ * Author: Prestaddons
+ * Website: http://www.prestaddons.fr
+ */
+
+/* Styles du module HTML Blocks */
+
+.colorpicker {
+	display:none;
+	background:url(../../img/admin/colorpicker_background.png);
+	width:356px;
+	height:176px;
+	position:absolute;
+	font-family:Arial, sans-serif;
+	overflow:hidden;
+}
+.colorpicker_color {
+	background:#ff0000;
+	width:150px;
+	height:150px;
+	position:absolute;
+	left:14px;
+	top:13px;
+	overflow:hidden;
+	cursor:crosshair;
+}
+.colorpicker_color div {
+	background:url(../../img/admin/colorpicker_overlay.png);
+	width:150px;
+	height:150px;
+	position:absolute;
+	left:0;
+	top:0;
+}
+.colorpicker_color div div {
+	background:url(../../img/admin/colorpicker_select.gif);
+	width:11px;
+	height:11px;
+	position:absolute;
+	left:0;
+	top:0;
+	margin:-5px 0 0 -5px;
+	overflow:hidden;
+}
+.colorpicker_hue {
+	position:absolute;
+	width:35px;
+	height:150px;
+	left:171px;
+	top:13px;
+	cursor:n-resize;
+}
+.colorpicker_hue div {
+	background:url(../../img/admin/colorpicker_indic.gif) left top;
+	width:35px;
+	height:9px;
+	position:absolute;
+	left:0;
+	margin:-4px 0 0 0;
+	overflow:hidden;
+}
+.colorpicker_new_color {
+	background:#ff0000;
+	width:60px;
+	height:30px;
+	position:absolute;
+	left:213px;
+	top:13px;
+}
+.colorpicker_current_color {
+	background:#ff0000;
+	width:60px;
+	height:30px;
+	position:absolute;
+	left:283px;
+	top:13px;
+}
+.colorpicker input {
+	background-color:transparent;
+	border:1px solid transparent;
+	height:11px;
+	position:absolute;
+	top:4px;
+	right:11px;
+	font-family:Arial, sans-serif;
+	font-size:10px;
+	color:#898989;
+	text-align:right;
+	margin:0;
+	padding:0;
+}
+.colorpicker_hex {
+	background:url(../../img/admin/colorpicker_hex.png) top;
+	width:72px;
+	height:22px;
+	position:absolute;
+	left:212px;
+	top:142px;
+}
+.colorpicker_hex input { right:6px; }
+.colorpicker_field {
+	background-position:top;
+	width:62px;
+	height:22px;
+	position:absolute;
+}
+.colorpicker_field span {
+	width:12px;
+	height:22px;
+	position:absolute;
+	top:0;
+	right:0;
+	overflow:hidden;
+	cursor:n-resize;
+}
+.colorpicker_rgb_r {
+	background-image:url(../../img/admin/colorpicker_rgb_r.png);
+	left:212px;
+	top:52px;
+}
+.colorpicker_rgb_g {
+	background-image:url(../../img/admin/colorpicker_rgb_g.png);
+	left:212px;
+	top:82px;
+}
+.colorpicker_rgb_b {
+	background-image:url(../../img/admin/colorpicker_rgb_b.png);
+	left:212px;
+	top:112px;
+}
+.colorpicker_hsb_h {
+	background-image:url(../../img/admin/colorpicker_hsb_h.png);
+	left:282px;
+	top:52px;
+}
+.colorpicker_hsb_s {
+	background-image:url(../../img/admin/colorpicker_hsb_s.png);
+	left:282px;
+	top:82px;
+}
+.colorpicker_hsb_b {
+	background-image:url(../../img/admin/colorpicker_hsb_b.png);
+	left:282px;
+	top:112px;
+}
+.colorpicker_submit {
+	background:url(../../img/admin/colorpicker_submit.png) top;
+	width:22px;
+	height:22px;
+	position:absolute;
+	left:322px;
+	top:142px;
+	overflow:hidden;
+}
+.colorpicker_focus { background-position:center; }
+.colorpicker_hex.colorpicker_focus { background-position:bottom; }
+.colorpicker_submit.colorpicker_focus { background-position:bottom; }
+.colorpicker_slider { background-position:bottom; }

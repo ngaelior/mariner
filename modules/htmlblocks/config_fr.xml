@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>htmlblocks</name>
+    <displayName><![CDATA[HTML Blocks - Blocs de contenu personnalisables]]></displayName>
+    <version><![CDATA[1.0.2]]></version>
+    <description><![CDATA[Ajoutez des blocs HTML personnalis&eacute;s pour vos contenus sur votre boutique.]]></description>
+    <author><![CDATA[Prestaddons]]></author>
+    <tab><![CDATA[front_office_features]]></tab>
+	<confirmUninstall><![CDATA[Êtes-vous sûr de vouloir désinstaller le module HTML Blocks ?]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>

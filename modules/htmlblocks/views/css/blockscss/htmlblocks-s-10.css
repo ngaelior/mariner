@@ -1,0 +1,14 @@
+#html_block_10 
+{
+margin-top:40px;
+}
+#html_block_10 .gallery {
+    width: 900px;
+    display: flex;
+    margin: 0 auto;
+}
+#html_block_10 .gallery .gallery-img{
+    display: flex;
+    margin: 10px;
+    border: 1px solid #000;
+}

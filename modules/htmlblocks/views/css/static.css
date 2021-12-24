@@ -1,0 +1,22 @@
+/* HTML Blocks Prestashop Module
+ * Copyright 2016, Prestaddons
+ * Author: Prestaddons
+ * Website: http://www.prestaddons.fr
+ */
+
+/* Styles du module HTML Blocks */
+.html_blocks_wrapper {
+	margin:20px 0;
+}
+@media (max-width: 767px){
+	.html_blocks_wrapper {
+		margin:0 !important;
+	}
+	.html_block {
+		width:100% !important;
+		float:none !important;
+		margin: 0 0 40px 0 !important;
+	}
+}
+
+/* Section dynamique générée par le backoffice */

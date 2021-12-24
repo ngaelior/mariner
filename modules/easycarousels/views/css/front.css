@@ -1,0 +1,251 @@
+.easycarousels {
+	position: relative;
+	clear: both;
+	display: block;
+}
+.carousel_block {
+	margin: 15px 0;
+}
+.c_container, .ec-tabs {
+	visibility: hidden;
+	max-height: 50px
+}
+.c_container.rendered, .ec-tabs.activated {
+	visibility: visible;
+	max-height: none;
+}
+.c_col{
+	text-align: center;
+}
+.one_by_one .nav_without_name {
+	padding-top: 52px;
+}
+.easycarousels h3.carousel_title {
+	margin: 0 0 15px 0;
+}
+.easycarousels.row h3.carousel_title {
+	margin: 0 15px 15px 15px;
+}
+.carousel-description {
+    margin: 15px;
+}
+
+/* nav tabs */
+.ec-tab-pane {
+	display: none;
+}
+.ec-tab-pane.active {
+	display: block;
+}
+.ec-tabs {
+	width: 100%;
+	float:left;
+	margin: 0 0 15px 0;
+}
+.row .ec-tabs {
+	padding: 0 15px;
+}
+.ec-tabs li {
+	float:left;
+	margin: 0 15px 0 0;
+	z-index: 1;
+	height: 42px;
+	line-height: 42px;
+}
+.ec-tabs li a {
+	color: #414141;
+	text-transform: uppercase;
+	text-decoration: none;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
+	padding: 0 12px;
+	background: #FFF;
+}
+.ec-tabs li a:hover{
+	color: #FFF;
+	background: #555;
+}
+.ec-tabs li.active a, .ec-tabs li.responsive_tabs_selection a{
+	color: #FFF;
+	background: #414141;
+}
+.ec-tabs-content {
+	clear: both;
+}
+
+/* compact tabs */
+.compact ul.ec-tabs  {
+	position: absolute;
+	z-index: 1;
+	width: 100%;
+	top: 0;
+}
+li.responsive_tabs_selection {
+	display: none;
+	position: relative;
+}
+.ec-tabs li.responsive_tabs_selection a {
+	padding-right: 30px;
+}
+.ec-tabs li.responsive_tabs_selection a:after {
+	content: '';
+	width: 12px;
+	height: 12px;
+	display: block;
+	border: 2px solid #CCC;
+	border-width: 0 2px 2px 0;
+	padding: 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+	position: absolute;
+	right: 12px;
+	top: 12px;
+}
+.easycarousels .in_tabs.compact {
+	padding-top: 52px;
+}
+.compact li.responsive_tabs_selection {
+	display: block;
+}
+.compact .closed  .carousel_title, .compact li.carousel_title.active{
+	display:none;
+}
+.easycarousels .in_tabs.compact .ec-tabs li {
+	width: 100%;
+	padding: 0;
+	overflow: hidden;
+}
+.easycarousels .in_tabs.compact  .ec-tabs li.carousel_title {
+	margin-top: -1px;
+	border: 1px solid #414141;
+}
+
+/* items */
+.c_item {
+	padding: 5px 15px;
+	position: relative;
+	text-align: center;
+}
+.c_item .item-title {
+	padding: 5px 0;
+	font-size: 1.1em;
+}
+.c_item img {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+	height: auto;
+}
+.c_item .primary-image, .c_item:hover .secondary-image {
+	display: block;
+}
+.c_item .secondary-image, .c_item:hover .primary-image {
+	display: none;
+}
+.c_item h5.product-title {
+	margin: 9px 5px;
+}
+.c_item .nowrap {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: block;
+}
+.c_item .prop-line {
+	margin: 5px;
+}
+.easycarousels .view_all {
+	text-transform: uppercase;
+}
+.c_item .button-container {
+	margin-top: 15px;
+}
+
+/* responsivity */
+@media (max-width: 767px) {
+	.easycarousels h3 {
+		font-size: 18px;
+	}
+}
+
+/* simple grid */
+.simple-grid .c_col {
+	display: inline-block;
+	vertical-align: top;
+}
+.simple-grid.xl-1 .c_col {width: 100%}
+.simple-grid.xl-2 .c_col {width: 50%}
+.simple-grid.xl-3 .c_col {width: 33.333%}
+.simple-grid.xl-4 .c_col {width: 25%}
+.simple-grid.xl-5 .c_col {width: 20%}
+.simple-grid.xl-6 .c_col {width: 16.666%}
+.simple-grid.xl-7 .c_col {width: 14.285%}
+.simple-grid.xl-8 .c_col {width: 12.5%}
+.simple-grid.xl-9 .c_col {width: 11.111%}
+.simple-grid.xl-10 .c_col {width: 10%}
+@media (max-width: 1199px) {
+	.simple-grid.l-1 .c_col {width: 100%}
+	.simple-grid.l-2 .c_col {width: 50%}
+	.simple-grid.l-3 .c_col {width: 33.333%}
+	.simple-grid.l-4 .c_col {width: 25%}
+	.simple-grid.l-5 .c_col {width: 20%}
+	.simple-grid.l-6 .c_col {width: 16.666%}
+	.simple-grid.l-7 .c_col {width: 14.285%}
+	.simple-grid.l-8 .c_col {width: 12.5%}
+	.simple-grid.l-9 .c_col {width: 11.111%}
+	.simple-grid.l-10 .c_col {width: 10%}
+}
+@media (max-width: 991px) {
+	.simple-grid.m-1 .c_col {width: 100%}
+	.simple-grid.m-2 .c_col {width: 50%}
+	.simple-grid.m-3 .c_col {width: 33.333%}
+	.simple-grid.m-4 .c_col {width: 25%}
+	.simple-grid.m-5 .c_col {width: 20%}
+	.simple-grid.m-6 .c_col {width: 16.666%}
+	.simple-grid.m-7 .c_col {width: 14.285%}
+	.simple-grid.m-8 .c_col {width: 12.5%}
+	.simple-grid.m-9 .c_col {width: 11.111%}
+	.simple-grid.m-10 .c_col {width: 10%}
+}
+@media (max-width: 767px) {
+	.simple-grid.s-1 .c_col {width: 100%}
+	.simple-grid.s-2 .c_col {width: 50%}
+	.simple-grid.s-3 .c_col {width: 33.333%}
+	.simple-grid.s-4 .c_col {width: 25%}
+	.simple-grid.s-5 .c_col {width: 20%}
+	.simple-grid.s-6 .c_col {width: 16.666%}
+	.simple-grid.s-7 .c_col {width: 14.285%}
+	.simple-grid.s-8 .c_col {width: 12.5%}
+	.simple-grid.s-9 .c_col {width: 11.111%}
+	.simple-grid.s-10 .c_col {width: 10%}
+}
+@media (max-width: 480px) {
+	.simple-grid.xs-1 .c_col {width: 100%}
+	.simple-grid.xs-2 .c_col {width: 50%}
+	.simple-grid.xs-3 .c_col {width: 33.333%}
+	.simple-grid.xs-4 .c_col {width: 25%}
+	.simple-grid.xs-5 .c_col {width: 20%}
+	.simple-grid.xs-6 .c_col {width: 16.666%}
+	.simple-grid.xs-7 .c_col {width: 14.285%}
+	.simple-grid.xs-8 .c_col {width: 12.5%}
+	.simple-grid.xs-9 .c_col {width: 11.111%}
+	.simple-grid.xs-10 .c_col {width: 10%}
+}
+
+/* native scroll */
+.scroll-x-wrapper {
+	overflow-x: scroll;
+}
+.scroll-x {
+	white-space: nowrap;
+}
+.scroll-x .c_col {
+	display: inline-block;
+	vertical-align: top;
+	white-space: normal;
+}
+
+/* since 2.6.1 */

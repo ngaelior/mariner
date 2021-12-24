@@ -1,0 +1,90 @@
+/** GENERAL **/
+.c-white {
+    color: white;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.border-none {
+    border: none !important;
+}
+
+.c-primary {
+    color: #041322;
+}
+
+.bg-primary {
+    background: #041322 !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.html_blocks_wrapper {
+    margin: 0;
+}
+
+/** Bandeau Top **/
+.bandeau-top p {
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1500px;
+    margin: auto;
+}
+
+/** Reassurance **/
+#block-reassurance ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.block-reassurance-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#block-reassurance .block-reassurance-item img {
+    width: 80px;
+    margin: 0 20px 20px;
+}
+
+#block-reassurance li .block-reassurance-item {
+    padding-top: 0;
+}
+
+/** category main **/
+.categorysectionsmain-products {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.categorysectionsmain-products .item {
+    width: calc(20% - 30px);
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 30px;
+}
+
+.categorysectionsmain-products .item:first-child {
+    width: calc(40% - 30px);
+}
+
+.categorysectionsmain-products .item .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.categorysectionsmain-products .item .content h2 {
+    margin: 0;
+}

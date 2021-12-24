@@ -1,0 +1,22 @@
+/* HTML Blocks Prestashop Module
+ * Copyright 2016, Prestaddons
+ * Author: Prestaddons
+ * Website: http://www.prestaddons.fr
+ */
+
+/* Styles du module HTML Blocks */
+#ui-datepicker-div{
+	z-index:5 !important;
+}
+.icon-AdminPopup:before {
+	content:'\f0f6';
+}
+#support-buttons-admin a {
+	width:133px;
+	margin-right:10px;
+}
+#support-buttons-admin a i{
+	display:block;
+	font-size:28px;
+	height:30px;
+}

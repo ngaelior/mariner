@@ -1,0 +1,99 @@
+.easycarousels .bx-wrapper {
+	position: relative;
+}
+/* nav arrows */
+.easycarousels .bx-wrapper .bx-controls-direction a {
+	top: 50%;
+	right: 0;
+	width: 50px;
+	height: 50px;
+	line-height: 52px;
+	margin-top: -25px;
+	border-radius: 50%;
+	text-align: center;
+	background: rgba(0,0,0,.4);
+	border: 0;
+	padding: 0;
+	transition: all 0.1s ease-in-out;
+	visibility: hidden;
+	opacity: 0;
+}
+.easycarousels .bx-wrapper:hover .bx-controls-direction a {
+	right: 20px;
+	visibility: visible;
+	opacity: 1;
+}
+.easycarousels .bx-wrapper .bx-controls-direction a.bx-prev {
+	left: 0;
+}
+.easycarousels .bx-wrapper:hover .bx-controls-direction a.bx-prev {
+	left: 20px;
+}
+.easycarousels .bx-wrapper .bx-controls-direction a:hover {
+	background: rgba(0,0,0,.7);
+}
+.easycarousels .bx-wrapper .bx-controls-direction a:before {
+	content: '';
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	position: relative;
+	border: 2px solid #FFF;
+	border-width: 2px 2px 0 0;
+	padding: 0;
+	left: -1px;
+	top: 3px;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+.easycarousels .bx-wrapper .bx-controls-direction a.bx-prev:before {
+	border-width: 0 0 2px 2px;
+	left: 1px;
+}
+@media (max-width: 767px) {
+	.easycarousels .bx-wrapper .bx-controls-direction a {
+		right: 20px;
+		visibility: visible;
+		opacity: 1;
+		width: 40px;
+		height: 40px;
+		line-height: 42px;
+		margin-top: -20px;
+	}
+	.easycarousels .bx-wrapper .bx-controls-direction a.bx-prev {
+		left: 20px;
+	}
+}
+
+/* pagination */
+.easycarousels .bx-controls.bx-has-pager {
+	margin-bottom: 25px;
+	padding-top: 10px;
+}
+.easycarousels .bx-wrapper .bx-pager.bx-default-pager a.bx-pager-link {
+	width: 12px;
+	height: 12px;
+	border: 2px solid #000;
+	background: #FFF;
+	border-radius: 100%;
+	opacity: 0.4;
+}
+.easycarousels .bx-wrapper .bx-pager.bx-default-pager a.bx-pager-link:hover {
+	opacity: 0.7;
+}
+.easycarousels .bx-wrapper .bx-pager.bx-default-pager a.bx-pager-link.active {
+	background: #000;
+	opacity: 0.7;
+}
+
+/* general */
+.bx-viewport{
+    text-align: left;
+}
+
+/* fix for /bx_loader.gif 404 (Not Found) */
+.easycarousels .bx-wrapper .bx-loading  {
+	background: none;
+}
+/* since 2.6.0 */
