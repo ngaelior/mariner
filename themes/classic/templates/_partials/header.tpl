@@ -37,7 +37,9 @@
         <div class="container">
             <div class="row">
                 <div class="hidden-sm-down">
-                    <div class="col-md-12">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
                         {block name='search'}
                             {hook h='displaySearch'}
                         {/block}
@@ -75,7 +77,7 @@
                 <div class="header-top-right col-md-8 col-sm-12 position-static">
                     {hook h='displayTop'}
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 header-icons">
                     {hook h='displayNav2'}
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <?php
 /**
  * HTML Blocks Prestashop Module
- * 
+ *
  * @author    Prestaddons <contact@prestaddons.fr>
  * @copyright 2016 Prestaddons
  * @license
@@ -38,7 +38,7 @@ class HtmlBlocks extends Module
      */
     public function __construct()
     {
-        require_once (dirname(__file__).'/classes/Block.php');
+        require_once(dirname(__file__) . '/classes/Block.php');
 
         $this->name = 'htmlblocks';
         $this->short_name = 'hb';
@@ -64,9 +64,9 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode install()
-     * 
+     *
      * Gère l'installation du module
-     * 
+     *
      * @return bool True si l'installation a fonctionné, false dans le cas contraire
      */
     public function install()
@@ -78,13 +78,17 @@ class HtmlBlocks extends Module
         }
 
         if (!parent::install()
-                || !$this->registerHook('displayHeader')
-                || !$this->registerHook('displayBackOfficeHeader')) {
+            || !$this->registerHook('displayHeader')
+            || !$this->registerHook('displayBackOfficeHeader')
+            || !$this->registerHook('displayCustomHtml1')
+            || !$this->registerHook('displayCustomHtml2')
+            || !$this->registerHook('displayCustomHtml3')
+        ) {
             return false;
         }
 
         $sql = array();
-        include (dirname(__file__).'/init/install_sql.php');
+        include(dirname(__file__) . '/init/install_sql.php');
         foreach ($sql as $s) {
             if (!Db::getInstance()->Execute($s)) {
                 return false;
@@ -98,9 +102,9 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode initFixtures()
-     * 
+     *
      * Initialise tous les paramètres nécessaires à l'installation du module
-     * 
+     *
      * @return array $params Tableau contenant les paramètres nécessaires à l'installation
      */
     private function initFixtures()
@@ -115,9 +119,9 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode uninstall()
-     * 
+     *
      * Gère la désinstallation du module
-     * 
+     *
      * @return bool True si la désinstallation a fonctionné, false dans le cas contraire
      */
     public function uninstall()
@@ -126,7 +130,7 @@ class HtmlBlocks extends Module
             return false;
         }
         $sql = array();
-        include (dirname(__file__).'/init/uninstall_sql.php');
+        include(dirname(__file__) . '/init/uninstall_sql.php');
         foreach ($sql as $s) {
             if (!Db::getInstance()->Execute($s)) {
                 return false;
@@ -138,14 +142,14 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode postValidation()
-     * 
+     *
      * Contrôle les variables saisies dans le backoffice et définit les éventuelles erreurs à afficher
-     * 
+     *
      * @return void
      */
     private function postValidation()
     {
-        if (Tools::isSubmit('submitadd'.$this->name) || Tools::isSubmit('submitupdate'.$this->name)) {
+        if (Tools::isSubmit('submitadd' . $this->name) || Tools::isSubmit('submitupdate' . $this->name)) {
             if (!Validate::isDateFormat(Tools::getValue('date_from'))) {
                 $this->post_errors[] = $this->l('Beginning date must be a valid date');
             }
@@ -157,15 +161,15 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode postProcess()
-     * 
+     *
      * Traitement des informations saisies dans le backoffice
      * Traitements divers, mise à jour la base de données, définition des messages d'erreur ou de confirmation...
-     * 
+     *
      * @return void
      */
     protected function postProcess()
     {
-        if (Tools::isSubmit('submitadd'.$this->name) || Tools::isSubmit('submitupdate'.$this->name)) {
+        if (Tools::isSubmit('submitadd' . $this->name) || Tools::isSubmit('submitupdate' . $this->name)) {
             $id_block = Tools::getvalue('id_block');
             $date_from = Tools::getvalue('date_from');
             $date_to = Tools::getvalue('date_to');
@@ -176,10 +180,10 @@ class HtmlBlocks extends Module
             $id_hook = Tools::getvalue('id_hook');
             $active = Tools::getvalue('active');
 
-            if (Tools::isSubmit('submitadd'.$this->name)) {
+            if (Tools::isSubmit('submitadd' . $this->name)) {
                 $block = new Block();
                 $block->excluded_categories = '';
-            } elseif (Tools::isSubmit('submitupdate'.$this->name)) {
+            } elseif (Tools::isSubmit('submitupdate' . $this->name)) {
                 $block = new Block($id_block);
                 $old_id_hook = $block->id_hook;
             }
@@ -200,22 +204,22 @@ class HtmlBlocks extends Module
 
             $languages = Language::getLanguages(false);
             foreach ($languages as $language) {
-                $block->title[$language['id_lang']] = Tools::getValue('title_'.$language['id_lang']);
-                $block->content[$language['id_lang']] = Tools::getValue('content_'.$language['id_lang']);
-                $block->link[$language['id_lang']] = Tools::getValue('link_'.$language['id_lang']);
-                $block->link_title[$language['id_lang']] = Tools::getValue('link_title_'.$language['id_lang']);
+                $block->title[$language['id_lang']] = Tools::getValue('title_' . $language['id_lang']);
+                $block->content[$language['id_lang']] = Tools::getValue('content_' . $language['id_lang']);
+                $block->link[$language['id_lang']] = Tools::getValue('link_' . $language['id_lang']);
+                $block->link_title[$language['id_lang']] = Tools::getValue('link_title_' . $language['id_lang']);
             }
 
-            if (Tools::isSubmit('submitadd'.$this->name)) {
+            if (Tools::isSubmit('submitadd' . $this->name)) {
                 $block->add();
-                $this->addCssFile("#html_block_".$block->id."{"."\n\n"."}", $block->id);
+                $this->addCssFile("#html_block_" . $block->id . "{" . "\n\n" . "}", $block->id);
                 if ($this->is_version15) {
                     $this->registerHook(htmlblocks::getNameById($id_hook));
                 } else {
                     $this->registerHook(Hook::getNameById($id_hook));
                 }
                 $this->html .= $this->displayConfirmation($this->l('HTML Block has been added'));
-            } elseif (Tools::isSubmit('submitupdate'.$this->name)) {
+            } elseif (Tools::isSubmit('submitupdate' . $this->name)) {
                 if ($old_id_hook != $id_hook) {
                     $this->unregisterHook($old_id_hook);
                     if ($this->is_version15) {
@@ -234,11 +238,11 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode getContent()
-     * 
+     *
      * Gère l'administration du module dans le backoffice
-     * Dispatch vers les différentes méthodes en fonctions des cas 
+     * Dispatch vers les différentes méthodes en fonctions des cas
      * (affichage des formulaires, des erreurs, des confirmations, ...)
-     * 
+     *
      * @return string HTML de la partie backoffice du module
      */
     public function getContent()
@@ -261,11 +265,11 @@ class HtmlBlocks extends Module
             $this->html .= $this->renderExceptionsForm();
         } elseif (Tools::isSubmit('configuratecss')) {
             $this->html .= $this->renderCssConfigForm();
-        } elseif (Tools::isSubmit('add'.$this->name)
-                || Tools::isSubmit('update'.$this->name)
-                || (count($this->post_errors))) {
+        } elseif (Tools::isSubmit('add' . $this->name)
+            || Tools::isSubmit('update' . $this->name)
+            || (count($this->post_errors))) {
             $this->html .= $this->renderForm();
-        } elseif (Tools::isSubmit('support'.$this->name)) {
+        } elseif (Tools::isSubmit('support' . $this->name)) {
             $this->html .= $this->renderSupportForm();
         } else {
             if (Tools::isSubmit('deletehtmlblocks')) {
@@ -278,7 +282,7 @@ class HtmlBlocks extends Module
             $this->html .= $this->renderList();
         }
 
-        $this->html = $this->getButtonsTpl().$this->html;
+        $this->html = $this->getButtonsTpl() . $this->html;
         return $this->html;
     }
 
@@ -299,9 +303,9 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode renderList()
-     * 
+     *
      * Affiche la liste principale d'éléments du module dans le backoffice
-     * 
+     *
      * @return object helper
      */
     public function renderList()
@@ -312,9 +316,9 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode initList()
-     * 
+     *
      * Initialise la liste principale d'éléments du module dans le backoffice
-     * 
+     *
      * @return object helper
      */
     protected function initList()
@@ -342,8 +346,7 @@ class HtmlBlocks extends Module
             'width' => 40,
             'align' => 'center',
             'position' => 'position',
-            'search' => false)
-        ;
+            'search' => false);
         $this->fields_list['title'] = array(
             'title' => $this->l('Title'),
             'orderby' => false,
@@ -382,7 +385,7 @@ class HtmlBlocks extends Module
         $helper->identifier = 'id_block';
 
         // Enable drag & drop on position field
-        $helper->table_id = 'module-'.$this->name;
+        $helper->table_id = 'module-' . $this->name;
         $helper->position_identifier = 'position';
         $helper->orderBy = 'position';
         $helper->orderWay = 'ASC';
@@ -391,35 +394,35 @@ class HtmlBlocks extends Module
         $helper->show_toolbar = true;
         //$helper->imageType = 'jpg';
         $helper->toolbar_btn['new'] = array(
-            'href' => AdminController::$currentIndex.'&configure='
-            .$this->name.'&add'.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'),
+            'href' => AdminController::$currentIndex . '&configure='
+                . $this->name . '&add' . $this->name . '&token=' . Tools::getAdminTokenLite('AdminModules'),
             'desc' => $this->l('Add new')
         );
 
         $helper->toolbar_btn['edit'] = array(
-            'href' => AdminController::$currentIndex.'&configure='
-            .$this->name.'&configuratecss&token='.Tools::getAdminTokenLite('AdminModules'),
+            'href' => AdminController::$currentIndex . '&configure='
+                . $this->name . '&configuratecss&token=' . Tools::getAdminTokenLite('AdminModules'),
             'desc' => $this->l('Configure CSS')
         );
 
         if ($this->is_version16) {
             $helper->toolbar_btn['anchor'] = array(
-                'href' => AdminController::$currentIndex.'&configure='
-                .$this->name.'&exceptionsmanagement&token='.Tools::getAdminTokenLite('AdminModules'),
+                'href' => AdminController::$currentIndex . '&configure='
+                    . $this->name . '&exceptionsmanagement&token=' . Tools::getAdminTokenLite('AdminModules'),
                 'desc' => $this->l('Exeptions management')
             );
         } else {
 
             $helper->toolbar_btn['new-url'] = array(
-                'href' => AdminController::$currentIndex.'&configure='
-                .$this->name.'&exceptionsmanagement&token='.Tools::getAdminTokenLite('AdminModules'),
+                'href' => AdminController::$currentIndex . '&configure='
+                    . $this->name . '&exceptionsmanagement&token=' . Tools::getAdminTokenLite('AdminModules'),
                 'desc' => $this->l('Exeptions management')
             );
         }
 
         $helper->toolbar_btn['help-new'] = array(
-            'href' => AdminController::$currentIndex.'&configure='
-            .$this->name.'&support&token='.Tools::getAdminTokenLite('AdminModules'),
+            'href' => AdminController::$currentIndex . '&configure='
+                . $this->name . '&support&token=' . Tools::getAdminTokenLite('AdminModules'),
             'desc' => $this->l('Support')
         );
 
@@ -427,7 +430,7 @@ class HtmlBlocks extends Module
         $helper->title = $this->displayName;
         $helper->table = $this->name;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
-        $helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
+        $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
         $helper->listTotal = count($this->getListContent($this->context->cookie->id_lang));
 
         return $helper;
@@ -438,40 +441,40 @@ class HtmlBlocks extends Module
         $spacer = str_repeat('&nbsp;', $this->spacer_size);
         $items = $this->getMenuItems();
 
-        $html = '<optgroup label="'.$this->l('CMS').'">';
+        $html = '<optgroup label="' . $this->l('CMS') . '">';
         $html .= $this->getCMSOptions(0, 1, $this->context->language->id, $items);
         $html .= '</optgroup>';
 
         // BEGIN SUPPLIER
-        $html .= '<optgroup label="'.$this->l('Supplier').'">';
+        $html .= '<optgroup label="' . $this->l('Supplier') . '">';
         // Option to show all Suppliers
-        $html .= '<option value="ALLSUP0">'.$this->l('All suppliers').'</option>';
+        $html .= '<option value="ALLSUP0">' . $this->l('All suppliers') . '</option>';
         $suppliers = Supplier::getSuppliers(false, $this->context->language->id);
         foreach ($suppliers as $supplier) {
-            if (!in_array('SUP'.$supplier['id_supplier'], $items)) {
-                $html .= '<option value="SUP'.$supplier['id_supplier'].'">'.$spacer.$supplier['name'].'</option>';
+            if (!in_array('SUP' . $supplier['id_supplier'], $items)) {
+                $html .= '<option value="SUP' . $supplier['id_supplier'] . '">' . $spacer . $supplier['name'] . '</option>';
             }
         }
         $html .= '</optgroup>';
 
         // BEGIN Manufacturer
-        $html .= '<optgroup label="'.$this->l('Manufacturer').'">';
+        $html .= '<optgroup label="' . $this->l('Manufacturer') . '">';
         // Option to show all Manufacturers
-        $html .= '<option value="ALLMAN0">'.$this->l('All manufacturers').'</option>';
+        $html .= '<option value="ALLMAN0">' . $this->l('All manufacturers') . '</option>';
         $manufacturers = Manufacturer::getManufacturers(false, $this->context->language->id);
         foreach ($manufacturers as $manufacturer) {
-            if (!in_array('MAN'.$manufacturer['id_manufacturer'], $items)) {
-                $html .= '<option value="MAN'.$manufacturer['id_manufacturer'].'">'
-                    .$spacer
-                    .$manufacturer['name']
-                    .'</option>';
+            if (!in_array('MAN' . $manufacturer['id_manufacturer'], $items)) {
+                $html .= '<option value="MAN' . $manufacturer['id_manufacturer'] . '">'
+                    . $spacer
+                    . $manufacturer['name']
+                    . '</option>';
             }
         }
         $html .= '</optgroup>';
 
         // BEGIN Categories
 
-        $html .= '<optgroup label="'.$this->l('Categories').'">';
+        $html .= '<optgroup label="' . $this->l('Categories') . '">';
 
         $shops_to_get = Shop::getContextListShopID();
 
@@ -484,17 +487,16 @@ class HtmlBlocks extends Module
         $html .= '</optgroup>';
 
 
-
         // BEGIN Products
-        $html .= '<optgroup label="'.$this->l('Products').'">';
-        $html .= '<option value="PRODUCT">'.$spacer.$this->l('Choose product ID').'</option>';
+        $html .= '<optgroup label="' . $this->l('Products') . '">';
+        $html .= '<option value="PRODUCT">' . $spacer . $this->l('Choose product ID') . '</option>';
         $html .= '</optgroup>';
 
 
         $controllers = DispatcherCore::getControllers(_PS_FRONT_CONTROLLER_DIR_);
         ksort($controllers);
 
-        $html .= '<optgroup label="'.$this->l('Core').'">';
+        $html .= '<optgroup label="' . $this->l('Core') . '">';
 
         $i = 0;
         foreach ($controllers as $k => $v) {
@@ -502,21 +504,21 @@ class HtmlBlocks extends Module
                 $k = 'authentication';
                 $v = $v;
             }
-            $html .= '<option value="CORE'.(int)$i.'" >'.$k.'</option>';
-            $i ++;
+            $html .= '<option value="CORE' . (int)$i . '" >' . $k . '</option>';
+            $i++;
         }
 
         if ($this->checkPSVersion('1.6.0.5') && method_exists('Dispatcher', 'getModuleControllers')) {
             $modules_controllers_type = array('front' => $this->l('Front modules controller'));
             foreach ($modules_controllers_type as $type => $label) {
-                $html .= '<optgroup label="'.$this->l($label).'">';
+                $html .= '<optgroup label="' . $this->l($label) . '">';
                 $all_modules_controllers = Dispatcher::getModuleControllers($type);
                 foreach ($all_modules_controllers as $module => $modules_controllers) {
                     $j = 0;
                     foreach ($modules_controllers as $cont) {
                         $code_module = 1000 * ModuleCore::getModuleIdByName($module);
                         $code_controller = $code_module + $j;
-                        $html .= '<option value="MODULE'.$code_controller.'">'.$module.'-'.$cont.'</option>';
+                        $html .= '<option value="MODULE' . $code_controller . '">' . $module . '-' . $cont . '</option>';
                         $j++;
                     }
                 }
@@ -548,21 +550,21 @@ class HtmlBlocks extends Module
                 case 'CAT':
                     $category = new Category((int)$id, (int)$id_lang);
                     if (Validate::isLoadedObject($category)) {
-                        $html .= '<option selected="selected" value="CAT'.$id.'">'.$category->name.'</option>'.PHP_EOL;
+                        $html .= '<option selected="selected" value="CAT' . $id . '">' . $category->name . '</option>' . PHP_EOL;
                     }
                     break;
 
                 case 'PRD':
                     $product = new Product((int)$id, true, (int)$id_lang);
                     if (Validate::isLoadedObject($product)) {
-                        $html .= '<option selected="selected" value="PRD'.$id.'">'.$product->name.'</option>'.PHP_EOL;
+                        $html .= '<option selected="selected" value="PRD' . $id . '">' . $product->name . '</option>' . PHP_EOL;
                     }
                     break;
 
                 case 'CMS':
                     $cms = new CMS((int)$id, (int)$id_lang);
                     if (Validate::isLoadedObject($cms)) {
-                        $html .= '<option selected="selected" value="CMS'.$id.'">'.$cms->meta_title.'</option>'.PHP_EOL;
+                        $html .= '<option selected="selected" value="CMS' . $id . '">' . $cms->meta_title . '</option>' . PHP_EOL;
                     }
                     break;
 
@@ -570,51 +572,51 @@ class HtmlBlocks extends Module
                     $category = new CMSCategory((int)$id, (int)$id_lang);
                     if (Validate::isLoadedObject($category)) {
                         $html .= '<option selected="selected" value="CMSCAT'
-                            .$id
-                            .'">'
-                            .$category->name
-                            .'</option>'
-                            .PHP_EOL;
+                            . $id
+                            . '">'
+                            . $category->name
+                            . '</option>'
+                            . PHP_EOL;
                     }
                     break;
 
                 // Case to handle the option to show all Manufacturers
                 case 'ALLMAN':
                     $html .= '<option selected="selected" value="ALLMAN0">'
-                        .$this->l('All manufacturers')
-                        .'</option>'
-                        .PHP_EOL;
+                        . $this->l('All manufacturers')
+                        . '</option>'
+                        . PHP_EOL;
                     break;
 
                 case 'MAN':
                     $manufacturer = new Manufacturer((int)$id, (int)$id_lang);
                     if (Validate::isLoadedObject($manufacturer)) {
                         $html .= '<option selected="selected" value="MAN'
-                            .$id
-                            .'">'
-                            .$manufacturer->name
-                            .'</option>'
-                            .PHP_EOL;
+                            . $id
+                            . '">'
+                            . $manufacturer->name
+                            . '</option>'
+                            . PHP_EOL;
                     }
                     break;
 
                 // Case to handle the option to show all Suppliers
                 case 'ALLSUP':
                     $html .= '<option selected="selected" value="ALLSUP0">'
-                        .$this->l('All suppliers')
-                        .'</option>'
-                        .PHP_EOL;
+                        . $this->l('All suppliers')
+                        . '</option>'
+                        . PHP_EOL;
                     break;
 
                 case 'SUP':
                     $supplier = new Supplier((int)$id, (int)$id_lang);
                     if (Validate::isLoadedObject($supplier)) {
                         $html .= '<option selected="selected" value="SUP'
-                            .$id
-                            .'">'
-                            .$supplier->name
-                            .'</option>'
-                            .PHP_EOL;
+                            . $id
+                            . '">'
+                            . $supplier->name
+                            . '</option>'
+                            . PHP_EOL;
                     }
                     break;
 
@@ -630,9 +632,9 @@ class HtmlBlocks extends Module
                             $v = $v;
                         }
                         if ($i == $id) {
-                            $html .= '<option selected="selected" value="CORE'.(int)$i.'">'.$k.'</option>'.PHP_EOL;
+                            $html .= '<option selected="selected" value="CORE' . (int)$i . '">' . $k . '</option>' . PHP_EOL;
                         }
-                        $i ++;
+                        $i++;
                     }
                     break;
 
@@ -648,13 +650,13 @@ class HtmlBlocks extends Module
                                     $code_controller = $j + $code_module;
                                     if ($code_controller == $id) {
                                         $html .= '<option selected="selected" value="MODULE'
-                                            .(int)$code_controller
-                                            .'">'
-                                            .$module
-                                            .'-'
-                                            .$cont
-                                            .'</option>'
-                                            .PHP_EOL;
+                                            . (int)$code_controller
+                                            . '">'
+                                            . $module
+                                            . '-'
+                                            . $cont
+                                            . '</option>'
+                                            . PHP_EOL;
                                         $label = $label;
                                     }
                                     $j++;
@@ -683,7 +685,7 @@ class HtmlBlocks extends Module
           }
           } */
 
-        return $html.'</select>';
+        return $html . '</select>';
     }
 
     protected function getCMSOptions($parent = 0, $depth = 1, $id_lang = false, $items_to_skip = null, $id_shop = false)
@@ -697,13 +699,13 @@ class HtmlBlocks extends Module
         $spacer = str_repeat('&nbsp;', $this->spacer_size * (int)$depth);
 
         foreach ($categories as $category) {
-            if (isset($items_to_skip) && !in_array('CMS_CAT'.$category['id_cms_category'], $items_to_skip)) {
+            if (isset($items_to_skip) && !in_array('CMS_CAT' . $category['id_cms_category'], $items_to_skip)) {
                 $html .= '<option value="CMSCAT'
-                    .$category['id_cms_category']
-                    .'" style="font-weight: bold;">'
-                    .$spacer
-                    .$category['name']
-                    .'</option>';
+                    . $category['id_cms_category']
+                    . '" style="font-weight: bold;">'
+                    . $spacer
+                    . $category['name']
+                    . '</option>';
             }
             $html .= $this->getCMSOptions(
                 $category['id_cms_category'],
@@ -714,8 +716,8 @@ class HtmlBlocks extends Module
         }
 
         foreach ($pages as $page) {
-            if (isset($items_to_skip) && !in_array('CMS'.$page['id_cms'], $items_to_skip)) {
-                $html .= '<option value="CMS'.$page['id_cms'].'">'.$spacer.$page['meta_title'].'</option>';
+            if (isset($items_to_skip) && !in_array('CMS' . $page['id_cms'], $items_to_skip)) {
+                $html .= '<option value="CMS' . $page['id_cms'] . '">' . $spacer . $page['meta_title'] . '</option>';
             }
         }
 
@@ -731,33 +733,33 @@ class HtmlBlocks extends Module
         $categories = array();
 
         if (Tools::version_compare(_PS_VERSION_, '1.6.0.12', '>=') == true) {
-            $join_shop = ' INNER JOIN `'._DB_PREFIX_.'cms_category_shop` cs
+            $join_shop = ' INNER JOIN `' . _DB_PREFIX_ . 'cms_category_shop` cs
 			ON (bcp.`id_cms_category` = cs.`id_cms_category`)';
-            $where_shop = ' AND cs.`id_shop` = '.(int)$id_shop.' AND cl.`id_shop` = '.(int)$id_shop;
+            $where_shop = ' AND cs.`id_shop` = ' . (int)$id_shop . ' AND cl.`id_shop` = ' . (int)$id_shop;
         }
 
         if ($recursive === false) {
             $sql = 'SELECT bcp.`id_cms_category`, bcp.`id_parent`,
                 bcp.`level_depth`, bcp.`active`, bcp.`position`, cl.`name`, cl.`link_rewrite`
-				FROM `'._DB_PREFIX_.'cms_category` bcp'.
-                    $join_shop.'
-				INNER JOIN `'._DB_PREFIX_.'cms_category_lang` cl
+				FROM `' . _DB_PREFIX_ . 'cms_category` bcp' .
+                $join_shop . '
+				INNER JOIN `' . _DB_PREFIX_ . 'cms_category_lang` cl
 				ON (bcp.`id_cms_category` = cl.`id_cms_category`)
-				WHERE cl.`id_lang` = '.(int)$id_lang.'
-				AND bcp.`id_parent` = '.(int)$parent.
-                    $where_shop;
+				WHERE cl.`id_lang` = ' . (int)$id_lang . '
+				AND bcp.`id_parent` = ' . (int)$parent .
+                $where_shop;
 
             return Db::getInstance()->executeS($sql);
         } else {
             $sql = 'SELECT bcp.`id_cms_category`, bcp.`id_parent`,
                 bcp.`level_depth`, bcp.`active`, bcp.`position`, cl.`name`, cl.`link_rewrite`
-				FROM `'._DB_PREFIX_.'cms_category` bcp'.
-                    $join_shop.'
-				INNER JOIN `'._DB_PREFIX_.'cms_category_lang` cl
+				FROM `' . _DB_PREFIX_ . 'cms_category` bcp' .
+                $join_shop . '
+				INNER JOIN `' . _DB_PREFIX_ . 'cms_category_lang` cl
 				ON (bcp.`id_cms_category` = cl.`id_cms_category`)
-				WHERE cl.`id_lang` = '.(int)$id_lang.'
-				AND bcp.`id_parent` = '.(int)$parent.
-                    $where_shop;
+				WHERE cl.`id_lang` = ' . (int)$id_lang . '
+				AND bcp.`id_parent` = ' . (int)$parent .
+                $where_shop;
 
             $results = Db::getInstance()->executeS($sql);
             foreach ($results as $result) {
@@ -779,19 +781,19 @@ class HtmlBlocks extends Module
 
         $where_shop = '';
         if (Tools::version_compare(_PS_VERSION_, '1.6.0.12', '>=') == true) {
-            $where_shop = ' AND cl.`id_shop` = '.(int)$id_shop;
+            $where_shop = ' AND cl.`id_shop` = ' . (int)$id_shop;
         }
 
         $sql = 'SELECT c.`id_cms`, cl.`meta_title`, cl.`link_rewrite`
-			FROM `'._DB_PREFIX_.'cms` c
-			INNER JOIN `'._DB_PREFIX_.'cms_shop` cs
+			FROM `' . _DB_PREFIX_ . 'cms` c
+			INNER JOIN `' . _DB_PREFIX_ . 'cms_shop` cs
 			ON (c.`id_cms` = cs.`id_cms`)
-			INNER JOIN `'._DB_PREFIX_.'cms_lang` cl
+			INNER JOIN `' . _DB_PREFIX_ . 'cms_lang` cl
 			ON (c.`id_cms` = cl.`id_cms`)
-			WHERE c.`id_cms_category` = '.(int)$id_cms_category.'
-			AND cs.`id_shop` = '.(int)$id_shop.'
-			AND cl.`id_lang` = '.(int)$id_lang.
-                $where_shop.'
+			WHERE c.`id_cms_category` = ' . (int)$id_cms_category . '
+			AND cs.`id_shop` = ' . (int)$id_shop . '
+			AND cl.`id_lang` = ' . (int)$id_lang .
+            $where_shop . '
 			AND c.`active` = 1
 			ORDER BY `position`';
 
@@ -800,9 +802,9 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode getListContent()
-     * 
+     *
      * Récupère les éléments de la liste principale du module dans le backoffice
-     * 
+     *
      * @return object helper
      */
     public function getListContent()
@@ -811,9 +813,9 @@ class HtmlBlocks extends Module
         $order_by = 'position';
         $order_way = 'ASC';
 
-        if (Tools::isSubmit($this->name.'Orderby')) {
-            $order_by = Tools::getValue($this->name.'Orderby');
-            $order_way = Tools::getValue($this->name.'Orderway');
+        if (Tools::isSubmit($this->name . 'Orderby')) {
+            $order_by = Tools::getValue($this->name . 'Orderby');
+            $order_way = Tools::getValue($this->name . 'Orderway');
         }
 
         $block_list = Block::getBlocks($order_by, $order_way, false);
@@ -832,9 +834,9 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode renderForm()
-     * 
+     *
      * Affiche le formulaire principale du module dans le backoffice
-     * 
+     *
      * @return string HTML du backoffice du module
      */
     private function renderForm()
@@ -847,17 +849,17 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode renderCssConfigForm()
-     * 
+     *
      * Affiche le formulaire de configuration du css dans le backoffice
-     * 
+     *
      * @return string HTML du backoffice du module
      */
     private function renderCssConfigForm()
     {
-        $this->context->controller->addCSS($this->_path.'views/css/admin/colorpicker.css', 'all');
-        $this->context->controller->addJS($this->_path.'views/js/admin/colorpicker.js', 'all');
-        $this->context->controller->addJS($this->_path.'views/js/admin/edit_area_full.js', 'all');
-        $this->context->controller->addJS($this->_path.'views/js/admin.js', 'all');
+        $this->context->controller->addCSS($this->_path . 'views/css/admin/colorpicker.css', 'all');
+        $this->context->controller->addJS($this->_path . 'views/js/admin/colorpicker.js', 'all');
+        $this->context->controller->addJS($this->_path . 'views/js/admin/edit_area_full.js', 'all');
+        $this->context->controller->addJS($this->_path . 'views/js/admin.js', 'all');
 
         $msg = $this->handleForms();
 
@@ -872,8 +874,8 @@ class HtmlBlocks extends Module
             'blocks' => $blocks,
             'csss' => $csss,
             'alert' => $msg,
-            'url_back' => AdminController::$currentIndex.'&configure='
-            .$this->name.'&token='.Tools::getAdminTokenLite('AdminModules')
+            'url_back' => AdminController::$currentIndex . '&configure='
+                . $this->name . '&token=' . Tools::getAdminTokenLite('AdminModules')
         ));
 
         if (!$this->is_version16) {
@@ -885,9 +887,9 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode renderExceptionsForm()
-     * 
+     *
      * Affiche le formulaire de gestion des exeptions dans le backoffice
-     * 
+     *
      * @return string HTML du backoffice du module
      */
     private function renderExceptionsForm()
@@ -907,8 +909,8 @@ class HtmlBlocks extends Module
             'tab' => $id_block,
             'blocks' => $blocks,
             'alert' => $msg,
-            'url_back' => AdminController::$currentIndex.'&configure='
-            .$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'),
+            'url_back' => AdminController::$currentIndex . '&configure='
+                . $this->name . '&token=' . Tools::getAdminTokenLite('AdminModules'),
             'choices' => $this->renderChoicesSelect(),
             'selected_pages' => $selected_pages,
         ));
@@ -922,9 +924,9 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode initToolbar()
-     * 
+     *
      * Initialise la barre d'outils du formulaire principale du module dans le backoffice
-     * 
+     *
      * @return array $this->toolbar_btn
      */
     private function initToolbar()
@@ -932,19 +934,19 @@ class HtmlBlocks extends Module
         if (!$this->is_version16) {
             $this->toolbar_btn['save'] = array(
                 'desc' => $this->l('Save'),
-                'href' => AdminController::$currentIndex.'&configure='
-                .$this->name.'&save'.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules')
+                'href' => AdminController::$currentIndex . '&configure='
+                    . $this->name . '&save' . $this->name . '&token=' . Tools::getAdminTokenLite('AdminModules')
             );
             $this->toolbar_btn['back'] = array(
-                'href' => AdminController::$currentIndex.'&configure='
-                .$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'),
+                'href' => AdminController::$currentIndex . '&configure='
+                    . $this->name . '&token=' . Tools::getAdminTokenLite('AdminModules'),
                 'desc' => $this->l('Back to list', null, null, false)
             );
         }
 
         $this->toolbar_btn['help-new'] = array(
-            'href' => AdminController::$currentIndex.'&configure='
-            .$this->name.'&support&token='.Tools::getAdminTokenLite('AdminModules'),
+            'href' => AdminController::$currentIndex . '&configure='
+                . $this->name . '&support&token=' . Tools::getAdminTokenLite('AdminModules'),
             'desc' => $this->l('Support')
         );
 
@@ -953,15 +955,15 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode initForm()
-     * 
+     *
      * Initialise le formulaire principale du module dans le backoffice
-     * 
+     *
      * @return object helper
      */
     private function initForm()
     {
         //$this->context->controller->addCSS($this->_path.'views/css/mp-admin.css');
-        $this->context->controller->addJS($this->_path.'views/js/admin.js');
+        $this->context->controller->addJS($this->_path . 'views/js/admin.js');
 
         // Get default Language
         $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
@@ -971,8 +973,8 @@ class HtmlBlocks extends Module
         foreach ($hooks as $hook) {
             if ($this->is_version16) {
                 if (Tools::strpos($hook['name'], 'display') !== false
-                        && Tools::strpos($hook['name'], 'Admin') === false
-                        && Tools::strpos($hook['name'], 'BackOffice') === false) {
+                    && Tools::strpos($hook['name'], 'Admin') === false
+                    && Tools::strpos($hook['name'], 'BackOffice') === false) {
                     $hooks_list[] = array(
                         'id' => $hook['id_hook'],
                         'name' => $hook['name'],
@@ -980,8 +982,8 @@ class HtmlBlocks extends Module
                 }
             } else {
                 if (strpos($hook['name'], 'display') !== false
-                        && strpos($hook['name'], 'Admin') === false
-                        && strpos($hook['name'], 'BackOffice') === false) {
+                    && strpos($hook['name'], 'Admin') === false
+                    && strpos($hook['name'], 'BackOffice') === false) {
                     $hooks_list[] = array(
                         'id' => $hook['id_hook'],
                         'name' => $hook['name'],
@@ -995,12 +997,12 @@ class HtmlBlocks extends Module
         $helper->name_controller = $this->name;
         $helper->identifier = $this->identifier;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
-        $helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
+        $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
 
         if (Tools::getIsset('addhtmlblocks')) {
-            $helper->submit_action = 'submitadd'.$this->name;
+            $helper->submit_action = 'submitadd' . $this->name;
         } elseif (Tools::getIsset('updatehtmlblocks')) {
-            $helper->submit_action = 'submitupdate'.$this->name;
+            $helper->submit_action = 'submitupdate' . $this->name;
         }
 
         // Language
@@ -1020,15 +1022,15 @@ class HtmlBlocks extends Module
                 'icon' => 'icon-file-code-o',
             ),
             'submit' => array(
-                'name' => 'submit'.$this->name,
+                'name' => 'submit' . $this->name,
                 'title' => $this->l('Save'),
             ),
             'buttons' => array(
                 array(
                     'icon' => 'process-icon-back',
                     'title' => $this->l('Back to list'),
-                    'href' => AdminController::$currentIndex.'&configure='
-                    .$this->name.'&token='.Tools::getAdminTokenLite('AdminModules')
+                    'href' => AdminController::$currentIndex . '&configure='
+                        . $this->name . '&token=' . Tools::getAdminTokenLite('AdminModules')
                 )
             ),
             'input' => array(
@@ -1098,13 +1100,13 @@ class HtmlBlocks extends Module
                         'type' => 'button',
                         'icon' => 'edit',
                         'title' => $this->l('Configure CSS'),
-                        'href' => AdminController::$currentIndex.'&configure='.$this->name
-                        .'&configuratecss&token='.Tools::getAdminTokenLite('AdminModules')
-                        .'&idblock='.Tools::getValue('id_block'),
+                        'href' => AdminController::$currentIndex . '&configure=' . $this->name
+                            . '&configuratecss&token=' . Tools::getAdminTokenLite('AdminModules')
+                            . '&idblock=' . Tools::getValue('id_block'),
                         'nameA' => $this->l('Exceptions management'),
-                        'hrefA' => AdminController::$currentIndex.'&configure='.$this->name
-                        .'&exceptionsmanagement&token='.Tools::getAdminTokenLite('AdminModules')
-                        .'&idblock='.Tools::getValue('id_block')
+                        'hrefA' => AdminController::$currentIndex . '&configure=' . $this->name
+                            . '&exceptionsmanagement&token=' . Tools::getAdminTokenLite('AdminModules')
+                            . '&idblock=' . Tools::getValue('id_block')
                     )
                 );
             } else {
@@ -1115,13 +1117,13 @@ class HtmlBlocks extends Module
                         'type' => 'button15',
                         'icon' => 'process-icon-edit',
                         'title' => $this->l('Configure CSS'),
-                        'href' => AdminController::$currentIndex.'&configure='.$this->name
-                        .'&configuratecss&token='.Tools::getAdminTokenLite('AdminModules')
-                        .'&idblock='.Tools::getValue('id_block'),
+                        'href' => AdminController::$currentIndex . '&configure=' . $this->name
+                            . '&configuratecss&token=' . Tools::getAdminTokenLite('AdminModules')
+                            . '&idblock=' . Tools::getValue('id_block'),
                         'nameA' => $this->l('Exceptions management'),
-                        'hrefA' => AdminController::$currentIndex.'&configure='.$this->name
-                        .'&exceptionsmanagement&token='.Tools::getAdminTokenLite('AdminModules')
-                        .'&idblock='.Tools::getValue('id_block')
+                        'hrefA' => AdminController::$currentIndex . '&configure=' . $this->name
+                            . '&exceptionsmanagement&token=' . Tools::getAdminTokenLite('AdminModules')
+                            . '&idblock=' . Tools::getValue('id_block')
                     )
                 );
             }
@@ -1189,10 +1191,10 @@ class HtmlBlocks extends Module
                 'class' => 'fixed-width-lg', //only 1.6
                 'options' => array(
                     'query' =>
-                    array_merge(
-                        array(0 => array('id_currency' => 0, 'name' => $this->l('All currencies'))),
-                        Currency::getCurrenciesByIdShop((int)$this->context->shop->id)
-                    ),
+                        array_merge(
+                            array(0 => array('id_currency' => 0, 'name' => $this->l('All currencies'))),
+                            Currency::getCurrenciesByIdShop((int)$this->context->shop->id)
+                        ),
                     'id' => 'id_currency',
                     'name' => 'name'
                 )
@@ -1204,11 +1206,11 @@ class HtmlBlocks extends Module
                 'name' => 'id_country',
                 'class' => 'fixed-width-lg', //only 1.6
                 'options' => array(
-                'query' =>
-                    array_merge(
-                        array(0 => array('id_country' => 0, 'name' => $this->l('All countries'))),
-                        Country::getCountriesByIdShop((int)$this->context->shop->id, (int)$this->context->language->id)
-                    ),
+                    'query' =>
+                        array_merge(
+                            array(0 => array('id_country' => 0, 'name' => $this->l('All countries'))),
+                            Country::getCountriesByIdShop((int)$this->context->shop->id, (int)$this->context->language->id)
+                        ),
                     'id' => 'id_country',
                     'name' => 'name'
                 )
@@ -1249,7 +1251,7 @@ class HtmlBlocks extends Module
             ),
             'languages' => $this->context->controller->getLanguages(),
             'id_language' => $this->context->language->id,
-            'image_baseurl' => $this->_path.'images/',
+            'image_baseurl' => $this->_path . 'images/',
             'name_controller' => 'HtmlBlocks'
         );
 
@@ -1258,9 +1260,9 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode getAddFieldsValues()
-     * 
+     *
      * Récupère les valeurs des champs du formulaire en base de données
-     * 
+     *
      * @return array $fields Valeurs des champs du formulaire
      */
     public function getAddFieldsValues()
@@ -1302,13 +1304,13 @@ class HtmlBlocks extends Module
     {
         // Envoi des paramètres au template
         $this->context->smarty->assign(array(
-            'path' => _MODULE_DIR_.$this->name.'/',
+            'path' => _MODULE_DIR_ . $this->name . '/',
             'iso' => Language::getIsoById($this->context->cookie->id_lang),
             'display_name' => $this->displayName,
             'version' => $this->version,
             'author' => $this->author,
             'contact' => $this->contact,
-            'back_link' => AdminController::$currentIndex.'&configure='.$this->name.'&token='.
+            'back_link' => AdminController::$currentIndex . '&configure=' . $this->name . '&token=' .
                 Tools::getAdminTokenLite('AdminModules'),
             'ps_version16' => $this->checkPSVersion('1.6.0.0')
         ));
@@ -1322,8 +1324,8 @@ class HtmlBlocks extends Module
         $block = new Block($id_block);
         $id_hook = $block->id_hook;
         $block->delete();
-        if (file_exists(dirname(__FILE__).'/views/css/blockscss/htmlblocks-s-'.$id_block.'.css')) {
-            unlink(dirname(__FILE__).'/views/css/blockscss/htmlblocks-s-'.$id_block.'.css');
+        if (file_exists(dirname(__FILE__) . '/views/css/blockscss/htmlblocks-s-' . $id_block . '.css')) {
+            unlink(dirname(__FILE__) . '/views/css/blockscss/htmlblocks-s-' . $id_block . '.css');
         }
 
         $block_list = Block::getBlocksByIdHook($id_hook);
@@ -1354,7 +1356,7 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode generateCSS()
-     * 
+     *
      * Génère un fichier CSS en fonction des paramètres définits dans le backoffice du module
      */
     private function generateCSS()
@@ -1363,27 +1365,27 @@ class HtmlBlocks extends Module
             // Récupération des paramètres
             //$banner_page = Configuration::get($this->short_name.'_banner_page', null, null, $shop['id_shop']);
             // Récupération du fichier CSS static
-            $css_content = Tools::file_get_contents(dirname(__FILE__).'/views/css/static.css');
+            $css_content = Tools::file_get_contents(dirname(__FILE__) . '/views/css/static.css');
 
             // Génération du fichier CSS
             $css_content .= '';
 
-            $filename = 'htmlblocks-s-'.$shop['id_shop'].'.css';
+            $filename = 'htmlblocks-s-' . $shop['id_shop'] . '.css';
 
-            file_put_contents(dirname(__FILE__).'/views/css/'.$filename, $css_content, LOCK_EX);
+            file_put_contents(dirname(__FILE__) . '/views/css/' . $filename, $css_content, LOCK_EX);
         }
     }
 
     /**
      * Méthode checkPSVersion()
-     * 
+     *
      * Compare la version de Prestashop passée en paramètre avec la version courante
-     * 
+     *
      * @param string $version Version à comparer
      * @param string $compare Sens de la comparaison
-     * 
+     *
      * @return boolean True si la comparaison est vérifiée
-     * 
+     *
      */
     public function checkPSVersion($version = '1.5.0.0', $compare = '>')
     {
@@ -1392,7 +1394,7 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode checkPeriod()
-     * 
+     *
      * Contrôle la période d'affichage d'un bloc HTML
      */
     private function checkPeriod($block)
@@ -1517,7 +1519,7 @@ class HtmlBlocks extends Module
                         if ($i == $id) {
                             $controller = new $class();
                         }
-                        $i ++;
+                        $i++;
                     }
                     if (isset($controller->php_self) && $controller->php_self == $this->context->controller->php_self) {
                         return true;
@@ -1537,7 +1539,7 @@ class HtmlBlocks extends Module
                                     if ($code_controller == $id
                                         && Tools::isEmpty($this->context->controller->php_self)) {
                                         $mod_actif = $this->context->controller->page_name;
-                                        if ($mod_actif == 'module-'.$module.'-'.$cont) {
+                                        if ($mod_actif == 'module-' . $module . '-' . $cont) {
                                             $label = $label;
                                             return true;
                                         }
@@ -1554,7 +1556,7 @@ class HtmlBlocks extends Module
 
     /**
      * Méthode checkUserAccess()
-     * 
+     *
      * Contrôle si un utilisateur peut voir un bloc HTML
      */
     private function checkUserAccess($block)
@@ -1586,38 +1588,38 @@ class HtmlBlocks extends Module
     {
         $this->context->smarty->assign(array(
             'module_name' => $this->displayName,
-            'add_url' => AdminController::$currentIndex.'&configure='.
-                $this->name.'&addhtmlblocks&token='.Tools::getAdminTokenLite('AdminModules'),
-            'list_url' => AdminController::$currentIndex.'&configure='.
-                $this->name.'&token='.Tools::getAdminTokenLite('AdminModules'),
-            'css_url' => AdminController::$currentIndex.'&configure='.
-                $this->name.'&configuratecss&token='.Tools::getAdminTokenLite('AdminModules'),
-            'exceptions_url' => AdminController::$currentIndex.'&configure='.
-                $this->name.'&exceptionsmanagement&token='.Tools::getAdminTokenLite('AdminModules'),
+            'add_url' => AdminController::$currentIndex . '&configure=' .
+                $this->name . '&addhtmlblocks&token=' . Tools::getAdminTokenLite('AdminModules'),
+            'list_url' => AdminController::$currentIndex . '&configure=' .
+                $this->name . '&token=' . Tools::getAdminTokenLite('AdminModules'),
+            'css_url' => AdminController::$currentIndex . '&configure=' .
+                $this->name . '&configuratecss&token=' . Tools::getAdminTokenLite('AdminModules'),
+            'exceptions_url' => AdminController::$currentIndex . '&configure=' .
+                $this->name . '&exceptionsmanagement&token=' . Tools::getAdminTokenLite('AdminModules'),
             'support_url' => $this->addons_url,
-            'documentation_url' => AdminController::$currentIndex.'&configure='.
-                $this->name.'&support'.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'),
+            'documentation_url' => AdminController::$currentIndex . '&configure=' .
+                $this->name . '&support' . $this->name . '&token=' . Tools::getAdminTokenLite('AdminModules'),
             'ps_version16' => $this->checkPSVersion('1.6.0.0'),
         ));
-        return $this->context->smarty->fetch(_PS_MODULE_DIR_.$this->name.'/views/templates/admin/buttons.tpl');
+        return $this->context->smarty->fetch(_PS_MODULE_DIR_ . $this->name . '/views/templates/admin/buttons.tpl');
     }
 
     public function hookDisplayBackOfficeHeader()
     {
         if (Tools::getValue('configure') == $this->name) {
-            $this->context->controller->addCSS($this->_path.'views/css/admin/hb-admin.css', 'all');
+            $this->context->controller->addCSS($this->_path . 'views/css/admin/hb-admin.css', 'all');
         }
     }
 
     /**
      * Méthode hookDisplayHeader()
-     * 
+     *
      * Ajoute des fichiers css et/ou js dans la balise <head> de la page Html
      */
     public function hookDisplayHeader()
     {
         $this->context->controller->addCSS(
-            $this->_path.'views/css/htmlblocks-s-'.$this->context->shop->id.'.css',
+            $this->_path . 'views/css/htmlblocks-s-' . $this->context->shop->id . '.css',
             'all'
         );
 
@@ -1625,7 +1627,7 @@ class HtmlBlocks extends Module
         foreach ($blocks as $block) {
             if ($this->checkPeriod($block) && $this->checkUserAccess($block)) {
                 $this->context->controller->addCSS(
-                    $this->_path.'views/css/blockscss/htmlblocks-s-'.$block['id_block'].'.css',
+                    $this->_path . 'views/css/blockscss/htmlblocks-s-' . $block['id_block'] . '.css',
                     'all'
                 );
             }
@@ -1663,7 +1665,7 @@ class HtmlBlocks extends Module
             array_push(
                 $contentsCss,
                 Tools::file_get_contents(
-                    dirname(__FILE__).'/views/css/blockscss/htmlblocks-s-'.$block['id_block'].'.css'
+                    dirname(__FILE__) . '/views/css/blockscss/htmlblocks-s-' . $block['id_block'] . '.css'
                 )
             );
         }
@@ -1699,8 +1701,8 @@ class HtmlBlocks extends Module
 
     private function addCssFile($file, $id)
     {
-        $filename = 'htmlblocks-s-'.$id.'.css';
-        file_put_contents(dirname(__FILE__).'/views/css/blockscss/'.$filename, $file, LOCK_EX);
+        $filename = 'htmlblocks-s-' . $id . '.css';
+        file_put_contents(dirname(__FILE__) . '/views/css/blockscss/' . $filename, $file, LOCK_EX);
     }
 
     public function __call($name, $args)
@@ -1715,12 +1717,12 @@ class HtmlBlocks extends Module
 
     public static function getNameById($hook_id)
     {
-        $cache_id = 'hook_namebyid_'.$hook_id;
+        $cache_id = 'hook_namebyid_' . $hook_id;
         if (!Cache::isStored($cache_id)) {
             $result = Db::getInstance()->getValue('
 							SELECT `name`
-							FROM `'._DB_PREFIX_.'hook`
-							WHERE `id_hook` = '.(int)$hook_id);
+							FROM `' . _DB_PREFIX_ . 'hook`
+							WHERE `id_hook` = ' . (int)$hook_id);
             Cache::store($cache_id, $result);
             return $result;
         }
@@ -1739,7 +1741,7 @@ class HtmlBlocks extends Module
             if (count($shops) > 1) {
                 foreach ($shops as $key => $shop_id) {
                     $shop_group_id = Shop::getGroupFromShop($shop_id);
-                    $conf .= (string)($key > 1 ? ',' : '').
+                    $conf .= (string)($key > 1 ? ',' : '') .
                         Configuration::get('MOD_BLOCKTOPMENU_ITEMS', null, $shop_group_id, $shop_id);
                 }
             } else {
@@ -1770,7 +1772,7 @@ class HtmlBlocks extends Module
                     'shop' => $shop,
                 ));
                 $html .= $this->context->smarty->fetch(
-                    _PS_MODULE_DIR_.$this->name.'/views/templates/admin/options.tpl'
+                    _PS_MODULE_DIR_ . $this->name . '/views/templates/admin/options.tpl'
                 );
             }
 
@@ -1792,7 +1794,8 @@ class HtmlBlocks extends Module
         $sql_filter = '',
         $sql_sort = '',
         $sql_limit = ''
-    ) {
+    )
+    {
         if (isset($root_category) && !Validate::isInt($root_category)) {
             die(Tools::displayError());
         }
@@ -1805,26 +1808,26 @@ class HtmlBlocks extends Module
             $groups = (array)$groups;
         }
 
-        $cache_id = 'Category::getNestedCategories_'.md5(
-            (int)$shop_id.(int)$root_category.(int)$id_lang.(int)$active.(int)$active
-            .(isset($groups) && Group::isFeatureActive() ? implode('', $groups) : '')
-        );
+        $cache_id = 'Category::getNestedCategories_' . md5(
+                (int)$shop_id . (int)$root_category . (int)$id_lang . (int)$active . (int)$active
+                . (isset($groups) && Group::isFeatureActive() ? implode('', $groups) : '')
+            );
 
         if (!Cache::isStored($cache_id)) {
             $result = Db::getInstance()->executeS(
                 'SELECT c.*, cl.*
-				FROM `'._DB_PREFIX_.'category` c
-				INNER JOIN `'._DB_PREFIX_.'category_shop` category_shop
-                ON (category_shop.`id_category` = c.`id_category` AND category_shop.`id_shop` = "'.(int)$shop_id.'")
-				LEFT JOIN `'._DB_PREFIX_.'category_lang`
-                cl ON (c.`id_category` = cl.`id_category` AND cl.`id_shop` = "'.(int)$shop_id.'")
-				WHERE 1 '.$sql_filter.' '.($id_lang ? 'AND cl.`id_lang` = '.(int)$id_lang : '').'
-				'.($active ? ' AND (c.`active` = 1 OR c.`is_root_category` = 1)' : '').'
-				'.(isset($groups) && Group::isFeatureActive() ? ' AND cg.`id_group` IN ('.implode(',', $groups).')' : '').'
-				'.(!$id_lang || (isset($groups) && Group::isFeatureActive()) ? ' GROUP BY c.`id_category`' : '').'
-				'.($sql_sort != '' ? $sql_sort : ' ORDER BY c.`level_depth` ASC').'
-				'.($sql_sort == '' && $use_shop_restriction ? ', category_shop.`position` ASC' : '').'
-				'.($sql_limit != '' ? $sql_limit : '')
+				FROM `' . _DB_PREFIX_ . 'category` c
+				INNER JOIN `' . _DB_PREFIX_ . 'category_shop` category_shop
+                ON (category_shop.`id_category` = c.`id_category` AND category_shop.`id_shop` = "' . (int)$shop_id . '")
+				LEFT JOIN `' . _DB_PREFIX_ . 'category_lang`
+                cl ON (c.`id_category` = cl.`id_category` AND cl.`id_shop` = "' . (int)$shop_id . '")
+				WHERE 1 ' . $sql_filter . ' ' . ($id_lang ? 'AND cl.`id_lang` = ' . (int)$id_lang : '') . '
+				' . ($active ? ' AND (c.`active` = 1 OR c.`is_root_category` = 1)' : '') . '
+				' . (isset($groups) && Group::isFeatureActive() ? ' AND cg.`id_group` IN (' . implode(',', $groups) . ')' : '') . '
+				' . (!$id_lang || (isset($groups) && Group::isFeatureActive()) ? ' GROUP BY c.`id_category`' : '') . '
+				' . ($sql_sort != '' ? $sql_sort : ' ORDER BY c.`level_depth` ASC') . '
+				' . ($sql_sort == '' && $use_shop_restriction ? ', category_shop.`position` ASC' : '') . '
+				' . ($sql_limit != '' ? $sql_limit : '')
             );
 
             $categories = array();
