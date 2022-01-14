@@ -55,8 +55,8 @@
                 <div class="product-description">
                     {block name='product_name'}
                         {if $page.page_name == 'index'}
-                            <h3 class="h3 product-title text-left"><a href="{$product.url}"
-                                                                      content="{$product.url}">{$product.name|truncate:50:'...'}</a>
+                            <h3 class="h3 product-title"><a href="{$product.url}"
+                                                            content="{$product.url}">{$product.name|truncate:50:'...'}</a>
                             </h3>
                         {else}
                             <h2 class="h3 product-title"><a href="{$product.url}"
@@ -67,7 +67,7 @@
 
                     {block name='product_price_and_shipping'}
                         {if $product.show_price}
-                            <div class="product-price-and-shipping text-left">
+                            <div class="product-price-and-shipping">
                                 {if $product.has_discount}
                                     {hook h='displayProductPriceBlock' product=$product type="old_price"}
                                     <span class="regular-price"

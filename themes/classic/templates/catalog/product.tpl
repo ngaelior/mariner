@@ -229,26 +229,31 @@
         </div>
         <div class="custom-product-content">
             <div class="row">
-                <div class="col-xs-12 col-lg-6">
-                    {if isset($product.advanced_image_0) && $product.advanced_image_0 !=""}
+                {if isset($product.advanced_image_0) && $product.advanced_image_0 !=""}
+                    <div class="col-xs-12 col-lg-6">
                         <img src="/modules/customMarinerProduct/views/img/p/{$product.advanced_image_0}"/>
-                    {/if}
-                </div>
-                <div class="col-xs-12  col-lg-6 content">
-                    <h3>{$product.advanced_title_0}</h3>
-                    <p>{$product.advanced_description_0}</p>
-                </div>
+                    </div>
+                {/if}
+                {if isset($product.advanced_title_0) && $product.advanced_title_0 !=""}
+                    <div class="col-xs-12  col-lg-6 content">
+                        <h3>{$product.advanced_title_0}</h3>
+                        <p>{$product.advanced_description_0}</p>
+                    </div>
+                {/if}
             </div>
             <div class="row reverse-mobile">
-                <div class="col-xs-12  col-lg-6 content">
-                    <h3>{$product.advanced_title_1}</h3>
-                    <p>{$product.advanced_description_1}</p>
-                </div>
-                <div class="col-xs-12 col-lg-6">
-                    {if isset($product.advanced_image_1) && $product.advanced_image_1 !=""}
+                {if isset($product.advanced_title_1) && $product.advanced_title_1 !=""}
+                    <div class="col-xs-12  col-lg-6 content">
+                        <h3>{$product.advanced_title_1}</h3>
+                        <p>{$product.advanced_description_1}</p>
+                    </div>
+                {/if}
+                {if isset($product.advanced_image_1) && $product.advanced_image_1 !=""}
+                    <div class="col-xs-12 col-lg-6">
                         <img src="/modules/customMarinerProduct/views/img/p/{$product.advanced_image_1}"/>
-                    {/if}
-                </div>
+                    </div>
+                {/if}
+
             </div>
         </div>
 
