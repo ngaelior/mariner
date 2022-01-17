@@ -389,11 +389,14 @@ p {
 .header-icons {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
 }
 
 .header-icons img {
     margin: 20px;
+}
+
+.header-icons #_desktop_cart img {
+    margin-right: 5px;
 }
 
 #header .header-nav .blockcart {
@@ -443,15 +446,16 @@ p {
     background-size: cover !important;
 }
 
-#html_block_3 .item p {
+#html_block_3 .item p, #html_block_3 .item a {
     display: flex;
     flex-direction: column;
     text-align: center;
     font-size: 2.5rem;
+    line-height: 2.5rem;
     color: white;
 }
 
-#html_block_3 .item p .price {
+#html_block_3 .item p .price, #html_block_3 .item a .price {
     font-size: 4.5rem;
     margin-top: 2.5rem;
 }
@@ -529,6 +533,11 @@ input:focus, textarea:focus, select:focus {
 }
 
 /** PRODUCT CUSTOM **/
+#blockcart-modal .product-name {
+    color: #041322;
+}
+
+
 .custom-product-content .row {
     display: flex;
     align-items: center;
@@ -625,7 +634,12 @@ input:focus, textarea:focus, select:focus {
 
 #pshomeslider .pshomeslider-height {
     height: 220px;
+    background: white;
+}
 
+#header .top-menu a[data-depth="0"]:hover, #header a:hover, #subcategories ul li:hover .subcategory-image a, #subcategories ul li .subcategory-name {
+    color: #041322;
+    border-color: #041322;
 }
 
 @media only screen and (min-width: 768px) {
@@ -701,6 +715,58 @@ input:focus, textarea:focus, select:focus {
     }
 }
 
+/** cart **/
+#cart .bootstrap-touchspin input.form-control, #cart .bootstrap-touchspin input.input-group {
+    border: 2px solid black;
+}
+
+#cart .current-price {
+    color: #041322;
+}
+
+#cart .bootstrap-touchspin {
+    display: flex;
+}
+
+#header .header-nav .cart-preview.active {
+    background: white;
+}
+
+#authentication h1 {
+    text-align: center;
+}
+
+
+#header .header-nav .cart-preview.active .cart-products-count {
+    color: #041322;
+}
+
+/** form **/
+form .form-control-label {
+    font-size: 1.075rem;
+}
+
+.form-control-comment {
+    font-size: 1rem;
+}
+
+.register-form > p {
+    text-align: center;
+}
+
+.register-form .btn {
+    font-size: 1rem !important;
+    padding: 0.58rem 1rem !important;
+}
+
+.register-form > p a {
+    color: #041322;
+}
+
+#authentication .custom-checkbox label {
+    font-size: 1rem;
+}
+
 @media only screen and (min-width: 1024px) {
     .categorysectionsmain-products .item {
         width: calc(20% - 40px);
@@ -719,6 +785,10 @@ input:focus, textarea:focus, select:focus {
 
     .custom-product-content .content {
         padding: 0 80px;
+    }
+
+    #html_block_3 .item {
+        max-width: calc(33% - 40px);
     }
 }
 
@@ -752,10 +822,5 @@ input:focus, textarea:focus, select:focus {
 
     #block-reassurance ul {
         justify-content: space-between;
-    }
-
-    #html_block_3 .item {
-        max-width: calc(33% - 40px);
-
     }
 }

@@ -25,23 +25,26 @@
 <div id="_desktop_user_info">
     <div class="user-info">
         {if $logged}
-            <a
-                    class="logout hidden-sm-down"
-                    href="{$urls.actions.logout}"
-                    rel="nofollow"
-            >
-                <i class="material-icons">&#xE7FF;</i>
-                {l s='Sign out' d='Shop.Theme.Actions'}
-            </a>
-            <a
-                    class="account"
-                    href="{$urls.pages.my_account}"
-                    title="{l s='View my customer account' d='Shop.Theme.Customeraccount'}"
-                    rel="nofollow"
-            >
-                <i class="material-icons hidden-md-up logged">&#xE7FF;</i>
-                <span class="hidden-sm-down">{$customerName}</span>
-            </a>
+            <div style="display: flex;flex-direction: column">
+                <a
+                        style="display: flex;flex-direction: column"
+                        class="account"
+                        href="{$urls.pages.my_account}"
+                        title="{l s='View my customer account' d='Shop.Theme.Customeraccount'}"
+                        rel="nofollow"
+                >
+                    <img width="30" src="/img/c/account%20(1).jpg">
+
+                    <span class="hidden-sm-down">{$customerName}</span>
+                </a>
+                <a
+                        class="logout hidden-sm-down"
+                        href="{$urls.actions.logout}"
+                        rel="nofollow"
+                >
+                    {l s='Sign out' d='Shop.Theme.Actions'}
+                </a>
+            </div>
         {else}
             <a
                     href="{$urls.pages.my_account}"
