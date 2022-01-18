@@ -387,6 +387,7 @@ p {
 }
 
 .header-icons {
+    min-width: 350px;
     display: flex;
     justify-content: flex-end;
 }
@@ -406,6 +407,15 @@ p {
 
 .header-icons .user-info {
     margin-top: 5px;
+}
+
+#_desktop_language_selector, #_desktop_currency_selector {
+    align-self: center;
+    display: none;
+}
+
+#header .header-top-right {
+    justify-content: center;
 }
 
 /** Custom HTML BLOCKS **/
@@ -567,8 +577,16 @@ input:focus, textarea:focus, select:focus {
     border-color: #041322;
 }
 
+#product .tax-shipping-delivery-label {
+    display: inline;
+}
+
 #product .tabs, #product .card-block {
     padding: 0;
+}
+
+#products .page-not-found, #pagenotfound .page-not-found {
+    margin: 0;
 }
 
 #product .nav-link.active {
@@ -643,6 +661,10 @@ input:focus, textarea:focus, select:focus {
 }
 
 @media only screen and (min-width: 768px) {
+    #header .header-top a {
+        color: #022C59 !important;
+    }
+
     .discover-section {
         width: 100%;
     }
@@ -795,10 +817,6 @@ form .form-control-label {
 @media only screen and (min-width: 1200px) {
     .discover-section .image-section {
         max-height: 300px;
-    }
-
-    #header .header-top a {
-        color: #022C59 !important;
     }
 
     .featured-products .product {

@@ -1,28 +1,28 @@
 <?php
 /**
-* 2007-2018 PrestaShop
-*
-* NOTICE OF LICENSE
-*
-* This source file is subject to the Open Software License (OSL 3.0)
-* that is bundled with this package in the file LICENSE.txt.
-* It is also available through the world-wide-web at this URL:
-* http://opensource.org/licenses/osl-3.0.php
-* If you did not receive a copy of the license and are unable to
-* obtain it through the world-wide-web, please send an email
-* to license@prestashop.com so we can send you a copy immediately.
-*
-* DISCLAIMER
-*
-* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
-* versions in the future. If you wish to customize PrestaShop for your
-* needs please refer to http://www.prestashop.com for more information.
-*
-* @author PrestaShop SA <contact@prestashop.com>
-* @copyright 2007-2018 PrestaShop SA
-* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
-* International Registered Trademark & Property of PrestaShop SA
-**/
+ * 2007-2018 PrestaShop
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+ * versions in the future. If you wish to customize PrestaShop for your
+ * needs please refer to http://www.prestashop.com for more information.
+ *
+ * @author PrestaShop SA <contact@prestashop.com>
+ * @copyright 2007-2018 PrestaShop SA
+ * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * International Registered Trademark & Property of PrestaShop SA
+ **/
 if (file_exists(_PS_MODULE_DIR_ . 'ps_themecusto/vendor/autoload.php')) {
     require_once _PS_MODULE_DIR_ . 'ps_themecusto/vendor/autoload.php';
 }
@@ -39,7 +39,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
     {
         parent::__construct();
 
-        $this->isPsVersion174Plus = (bool) version_compare(_PS_VERSION_, '1.7.4', '>=');
+        $this->isPsVersion174Plus = (bool)version_compare(_PS_VERSION_, '1.7.4', '>=');
         $this->controller_quick_name = 'configuration';
         $this->aModuleActions = ['uninstall', 'install', 'configure', 'enable', 'disable', 'disable_mobile', 'enable_mobile', 'reset'];
         $this->moduleActionsNames = [
@@ -441,35 +441,35 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 }
                 $oModule->uninstall();
                 $sUrlActive = 'install';
-            break;
+                break;
             case 'install':
                 if ($this->getModule()->ready === true) {
                     break;
                 }
                 $oModule->install();
                 $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
-            break;
+                break;
             case 'enable':
                 $oModule->enable();
                 $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
-            break;
+                break;
             case 'disable':
                 $oModule->disable();
                 $sUrlActive = 'enable';
-            break;
+                break;
             case 'disable_mobile':
                 $oModule->disableDevice(Context::DEVICE_MOBILE);
                 $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
-            break;
+                break;
             case 'enable_mobile':
                 $oModule->enableDevice(Context::DEVICE_MOBILE);
                 $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
-            break;
+                break;
             case 'reset':
                 $oModule->uninstall();
                 $oModule->install();
                 $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
-            break;
+                break;
             default:
                 exit(0);
         }
@@ -481,7 +481,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
         $aModule['active'] = ThemeCustoRequests::getModuleDeviceStatus($oModule->id);
         $aModule['actions_url']['configure'] = $this->context->link->getAdminLink('AdminModules', true, false, ['configure' => $oModule->name]);
         $aModule['can_configure'] = method_exists($oModule, 'getContent') ? true : false;
-        $aModule['enable_mobile'] = (int) Db::getInstance()->getValue('SELECT enable_device FROM ' . _DB_PREFIX_ . 'module_shop WHERE id_module = ' . (int) $oModule->id);
+        $aModule['enable_mobile'] = (int)Db::getInstance()->getValue('SELECT enable_device FROM ' . _DB_PREFIX_ . 'module_shop WHERE id_module = ' . (int)$oModule->id);
 
         $this->context->smarty->assign([
             'module' => $aModule,
@@ -567,7 +567,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
     public function setModuleFinalList($oModuleInstance, $bIsInstalled)
     {
         $aModule = [];
-
+        if (!$oModuleInstance) return;
         $aModule['id_module'] = $oModuleInstance->id;
         $aModule['active'] = $oModuleInstance->active;
 
@@ -585,7 +585,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             $aModule['installed'] = 0;
         }
 
-        $aModule['enable_mobile'] = (int) Db::getInstance()->getValue('SELECT enable_device FROM ' . _DB_PREFIX_ . 'module_shop WHERE id_module = ' . (int) $oModuleInstance->id);
+        $aModule['enable_mobile'] = (int)Db::getInstance()->getValue('SELECT enable_device FROM ' . _DB_PREFIX_ . 'module_shop WHERE id_module = ' . (int)$oModuleInstance->id);
         $aModule['name'] = $oModuleInstance->name;
         $aModule['displayName'] = $oModuleInstance->displayName;
         $aModule['description'] = $oModuleInstance->description;

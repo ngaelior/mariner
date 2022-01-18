@@ -273,7 +273,7 @@ sftp-config.json
 ## File-based project format:
 *.ipr
 *.iws
-
+/img
 ## Plugin-specific files:
 
 # IntelliJ
