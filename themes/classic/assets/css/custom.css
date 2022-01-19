@@ -38,6 +38,10 @@ p, a {
     font-size: 1.2rem;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 .bold {
     font-family: 'Bebas Neue Pro Bold', serif;
 }
