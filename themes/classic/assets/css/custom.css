@@ -681,12 +681,9 @@ input:focus, textarea:focus, select:focus {
         margin: 0;
     }
 
-    #pshomeslider .carousel-item {
-        background-size: cover;
-    }
 
     #pshomeslider .pshomeslider-height {
-        height: 800px;
+        height: 35vh;
     }
 
     .discover-section .bg-primary {
@@ -838,7 +835,32 @@ form .form-control-label {
         color: #394867;
     }
 
+    #pshomeslider .carousel-item {
+        background-size: cover;
+    }
+
+    #pshomeslider .pshomeslider-height {
+        height: 35vh;
+    }
+
+
     #block-reassurance ul {
         justify-content: space-between;
     }
+}
+
+@media only screen and (min-width: 1400px) {
+
+    #pshomeslider .pshomeslider-height {
+        height: 45vh;
+    }
+
+}
+
+@media only screen and (min-width: 1600px) {
+
+    #pshomeslider .pshomeslider-height {
+        height: 55vh;
+    }
+
 }
