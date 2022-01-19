@@ -614,6 +614,7 @@ input:focus, textarea:focus, select:focus {
 
 #product .product-accessories .products .product {
     margin: 20px;
+    max-width: 215px;
 }
 
 #product .product-accessories {
