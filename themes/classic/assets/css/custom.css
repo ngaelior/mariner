@@ -710,7 +710,8 @@ input:focus, textarea:focus, select:focus {
 
 #faq-page h3 {
     color: #022C59;
-    padding-right: 30px;
+    padding-right: 40px;
+    max-width: 400px;
 }
 
 #faq-page .item h3:before, #faq-page .item h3:after {
