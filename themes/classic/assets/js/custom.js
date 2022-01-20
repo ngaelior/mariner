@@ -3,6 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.page-home .categorysectionsmain-products .item .content').forEach((item, index) => {
     item.style.backgroundImage = `url('../img/cms/${index + 1}.jpg')`;
   })
+  document.querySelectorAll('#faq-page .item').forEach(item => {
+    item.addEventListener('click', () => {
+        item.querySelector('p').classList.toggle('hidden')
+        item.querySelector('h3').classList.toggle('open')
+      }
+    )
+  })
+
   const mobile = window.innerWidth < 768
   const options = {
     infinite: true,

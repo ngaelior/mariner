@@ -46,6 +46,10 @@ body {
     box-shadow: none;
 }
 
+.hidden {
+    display: none;
+}
+
 .bold {
     font-family: 'Bebas Neue Pro Bold', serif;
 }
@@ -697,6 +701,41 @@ input:focus, textarea:focus, select:focus {
 #header .top-menu a[data-depth="0"]:hover, #header a:hover, #subcategories ul li:hover .subcategory-image a, #subcategories ul li .subcategory-name {
     color: #041322;
     border-color: #041322;
+}
+
+#faq-page .item h3 {
+    position: relative;
+    cursor: pointer;
+}
+
+#faq-page h3 {
+    color: #022C59;
+}
+
+#faq-page .item h3:before, #faq-page .item h3:after {
+    content: '';
+    position: absolute;
+    right: 0.75em;
+    top: 0.25em;
+    width: 2px;
+    height: 0.75em;
+    background-color: #3b4858;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+
+#faq-page .item h3 {
+    font-size: 1.4rem;
+    margin: 20px 0;
+}
+
+#faq-page .item h3:after {
+    transform: rotate(90deg);
+}
+
+#faq-page .item h3.open:before {
+    transform: rotate(90deg);
+
 }
 
 @media only screen and (min-width: 768px) {
