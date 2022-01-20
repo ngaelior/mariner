@@ -754,8 +754,9 @@ input:focus, textarea:focus, select:focus {
     background: white;
 }
 
-#authentication h1 {
+.page-header h1 {
     text-align: center;
+    color: #022C59;
 }
 
 
