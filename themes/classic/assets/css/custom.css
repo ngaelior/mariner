@@ -38,6 +38,14 @@ p, a {
     font-size: 1.2rem;
 }
 
+body {
+    overflow-x: hidden !important;
+}
+
+#header {
+    box-shadow: none;
+}
+
 .bold {
     font-family: 'Bebas Neue Pro Bold', serif;
 }
@@ -409,7 +417,7 @@ p {
     margin-top: 5px;
 }
 
-#_desktop_language_selector, #_desktop_currency_selector {
+#_desktop_language_selector, #_desktop_currency_selector, #_mobile_currency_selector, #_mobile_language_selector {
     align-self: center;
     display: none;
 }
@@ -606,6 +614,7 @@ input:focus, textarea:focus, select:focus {
 
 #product .product-accessories .products .product {
     margin: 20px;
+    max-width: 215px;
 }
 
 #product .product-accessories {
@@ -681,12 +690,9 @@ input:focus, textarea:focus, select:focus {
         margin: 0;
     }
 
-    #pshomeslider .carousel-item {
-        background-size: cover;
-    }
 
     #pshomeslider .pshomeslider-height {
-        height: 800px;
+        height: 35vh;
     }
 
     .discover-section .bg-primary {
@@ -839,7 +845,43 @@ form .form-control-label {
         color: #394867;
     }
 
+    #pshomeslider .carousel-item {
+        background-size: cover;
+    }
+
+    #pshomeslider .pshomeslider-height {
+        height: 35vh;
+    }
+
+
     #block-reassurance ul {
         justify-content: space-between;
+    }
+
+    #pshomeslider .pshomeslider-height {
+        min-height: 600px;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+
+    #pshomeslider .pshomeslider-height {
+        height: 45vh;
+    }
+
+}
+
+@media only screen and (min-width: 1600px) {
+
+    #pshomeslider .pshomeslider-height {
+        height: 55vh;
+    }
+
+}
+
+@media only screen and (min-width: 1920px) {
+    #pshomeslider {
+        max-width: 1920px !important;
+        margin: 0 auto !important;
     }
 }
