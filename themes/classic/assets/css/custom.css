@@ -747,6 +747,10 @@ input:focus, textarea:focus, select:focus {
 
 }
 
+.category-id-2 #left-column .block-categories, .category-id-2 #main #subcategories {
+    display: none;
+}
+
 @media only screen and (min-width: 768px) {
     #header .header-top a {
         color: #022C59 !important;
