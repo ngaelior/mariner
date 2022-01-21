@@ -23,12 +23,6 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 <section class="contact-form">
-    <p>Merci de nous le signaler par mail à l'adresse contact@mariner-underwear.com ou contactez le service clients au
-        01 45 73 66 37</p>
-    <p>
-
-        Ce site est édité par la société MARINER INTERNATIONAL, dont le siège social est situé au 3 rue de Rome, 93110
-        Rosny Sous Bois, France</p>
     <form action="{$urls.pages.contact}" method="post"
           {if $contact.allow_file_upload}enctype="multipart/form-data"{/if}>
         {if $notifications}
@@ -49,6 +43,14 @@
                         <h3>{l s='Contact us' d='Shop.Theme.Global'}</h3>
                     </div>
                 </div>
+                <p>Merci de nous le signaler par mail à l'adresse contact@mariner-underwear.com ou contactez le service
+                    clients au
+                    01 45 73 66 37</p>
+                <p>
+
+                    Ce site est édité par la société MARINER INTERNATIONAL, dont le siège social est situé au 3 rue de
+                    Rome, 93110
+                    Rosny Sous Bois, France</p>
 
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label"
