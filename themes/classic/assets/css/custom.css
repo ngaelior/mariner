@@ -751,6 +751,10 @@ input:focus, textarea:focus, select:focus {
     display: none;
 }
 
+.product-miniature .thumbnail-container .product-thumbnail img {
+    min-height: 250px;
+}
+
 @media only screen and (min-width: 768px) {
     #header .header-top a {
         color: #022C59 !important;
