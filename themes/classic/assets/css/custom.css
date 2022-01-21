@@ -755,6 +755,17 @@ input:focus, textarea:focus, select:focus {
     min-height: 250px;
 }
 
+#contact .form-control-label {
+    width: fit-content;
+}
+
+#contact .btn.btn-default {
+    background: #041322;
+    border: 2px solid #041322;
+    transition: .2s;
+    font-size: 1rem;
+}
+
 @media only screen and (min-width: 768px) {
     #header .header-top a {
         color: #022C59 !important;
