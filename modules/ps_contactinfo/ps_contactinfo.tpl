@@ -24,47 +24,41 @@
 *}
 
 <div class="block-contact">
-    <p>Merci de nous le signaler par mail à l'adresse contact@mariner-underwear.com ou contactez le service clients au
-        01 45 73 66 37</p>
-    <p>
-
-        Ce site est édité par la société MARINER INTERNATIONAL, dont le siège social est situé au 3 rue de Rome, 93110
-        Rosny Sous Bois, France</p>
-    <h4>{l s='Contact us' d='Shop.Theme.Global'}</h4>
+	<h4>{l s='Contact us' d='Shop.Theme.Global'}</h4>
     {$contact_infos.address.formatted nofilter}
     {if $contact_infos.phone}
-        <br>
-        {* First tag [1][/1] is for a HTML tag. *}
-        {l
+      <br>
+      {* First tag [1][/1] is for a HTML tag. *}
+      {l
         s='Tel: %phone%'
         sprintf=[
-        '%phone%' => $contact_infos.phone
+          '%phone%' => $contact_infos.phone
         ]
         d='Modules.Contactinfo.Shop'
-        }
+      }
     {/if}
     {if $contact_infos.fax}
-        <br>
-        {* First tag [1][/1] is for a HTML tag. *}
-        {l
+      <br>
+      {* First tag [1][/1] is for a HTML tag. *}
+      {l
         s='Fax: %fax%'
         sprintf=[
-        '%fax%' => $contact_infos.fax
+          '%fax%' => $contact_infos.fax
         ]
         d='Modules.Contactinfo.Shop'
-        }
+      }
     {/if}
     {if $contact_infos.email && $display_email}
-        <br>
-        {* First tag [1][/1] is for a HTML tag. *}
-        {l
+      <br>
+      {* First tag [1][/1] is for a HTML tag. *}
+      {l
         s='Email: [1]%email%[/1]'
         sprintf=[
-        '%email%' => $contact_infos.email,
-        '[1]' => '<a href="mailto:'|cat:$contact_infos.email|cat:'">',
-        '[/1]' => '</a>'
+          '%email%' => $contact_infos.email,
+          '[1]' => '<a href="mailto:'|cat:$contact_infos.email|cat:'">',
+          '[/1]' => '</a>'
         ]
         d='Modules.Contactinfo.Shop'
-        }
+      }
     {/if}
 </div>
