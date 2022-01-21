@@ -708,10 +708,17 @@ input:focus, textarea:focus, select:focus {
     cursor: pointer;
 }
 
+#faq-page h2 {
+    margin: 30px 0;
+}
+
+#faq-page {
+    max-width: 700px;
+}
+
 #faq-page h3 {
     color: #022C59;
     padding-right: 40px;
-    max-width: 700px;
 }
 
 #faq-page .item h3:before, #faq-page .item h3:after {
