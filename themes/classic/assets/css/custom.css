@@ -769,6 +769,14 @@ input:focus, textarea:focus, select:focus {
     padding: 0.435rem 1rem;
 }
 
+#search .h2 {
+    text-align: center;
+}
+
+#search .page-not-found {
+    margin: auto;
+}
+
 @media only screen and (min-width: 768px) {
     #header .header-top a {
         color: #022C59 !important;
