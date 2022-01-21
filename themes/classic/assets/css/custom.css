@@ -757,6 +757,8 @@ input:focus, textarea:focus, select:focus {
 
 #contact .form-control-label {
     width: fit-content;
+    min-width: 115px;
+    text-align: left;
 }
 
 #contact .btn.btn-default {
@@ -764,6 +766,7 @@ input:focus, textarea:focus, select:focus {
     border: 2px solid #041322;
     transition: .2s;
     font-size: 1rem;
+    padding: 0.435rem 1rem;
 }
 
 @media only screen and (min-width: 768px) {
