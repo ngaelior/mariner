@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <script src="//code-eu1.jivosite.com/widget/cw9y7i9du5" async></script>
 </head>
 
 <body id="{$page.page_name}" class="{$page.body_classes|classnames}">
