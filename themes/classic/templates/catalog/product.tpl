@@ -131,7 +131,37 @@
                             <div class="tab-pane fade in{if $product.description} active js-product-tab-active{/if}"
                                  id="description" role="tabpanel">
                                 {block name='product_description'}
-                                    <div class="product-description">{$product.description nofilter}</div>
+                                    {if strlen($product.description) > 150}
+                                        <div data-js-id="description"
+                                             data-content-short="{$product.description|truncate:150 nofilter}"
+                                             data-content="{$product.description}"
+                                             class="product-description">{$product.description|truncate:150 nofilter}</div>
+                                        <p data-js-id="see-more"
+                                           style=" font-size.7rem;font-weight: bold;text-decoration: underline;cursor: pointer">
+                                            Voir
+                                            plus</p>
+                                        <p data-js-id="see-less"
+                                           style=" font-size.7rem;font-weight: bold;text-decoration: underline;display:none;cursor: pointer">
+                                            Voir
+                                            moins</p>
+                                        <script>
+                                          const button = document.querySelector('[data-js-id="see-more"]')
+                                          const buttonLess = document.querySelector('[data-js-id="see-less"]')
+                                          const content = document.querySelector('[data-js-id="description"]')
+                                          button.addEventListener('click', () => {
+                                            button.style.display = 'none'
+                                            buttonLess.style.display = 'block'
+                                            content.innerHTML = content.getAttribute('data-content')
+                                          })
+                                          buttonLess.addEventListener('click', () => {
+                                            buttonLess.style.display = 'none'
+                                            button.style.display = 'block'
+                                            content.innerHTML = content.getAttribute('data-content-short')
+                                          })
+                                        </script>
+                                    {else}
+                                        <div class="product-description">{$product.description nofilter}</div>
+                                    {/if}
                                 {/block}
                             </div>
                             {block name='product_details'}
