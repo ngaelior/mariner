@@ -39,6 +39,7 @@
     {block name='stylesheets'}
       {include file="_partials/stylesheets.tpl" stylesheets=$stylesheets}
     {/block}
+    <script src="//code-eu1.jivosite.com/widget/cw9y7i9du5" async></script>
 
   </head>
 
