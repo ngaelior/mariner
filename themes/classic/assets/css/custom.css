@@ -533,6 +533,10 @@ p {
     margin: 15px 0;
 }
 
+#product #wrapper {
+    padding-top: 0;
+}
+
 #product #wrapper .breadcrumb ol {
     margin: 15px 0 15px;
 }
