@@ -727,6 +727,7 @@ input:focus, textarea:focus, select:focus {
 
 #faq-page {
     max-width: 700px;
+    margin: auto;
 }
 
 #faq-page h3 {
