@@ -178,6 +178,11 @@ p, strong, em, ul, li {
     font-size: 1rem;
 }
 
+a {
+    font-family: 'BebasNeueProBook', Sans-serif;
+    font-size: 1rem;
+}
+
 #product h1 {
     font-family: "Bebas Neue Pro Italic";
     color: #041322;
