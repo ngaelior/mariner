@@ -555,7 +555,8 @@ p, strong, em, ul, li {
 #module-prestablog-blog #prestablogfront h5, #module-prestablog-blog #prestablogfront h6 {
     text-align: left;
     border: none;
-    margin: 20px 0;
+    margin: 40px 0 20px;
+    padding: 0;
 }
 
 #module-prestablog-blog .prestablogExtra {
