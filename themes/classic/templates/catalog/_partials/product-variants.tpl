@@ -1,86 +1,75 @@
-{**
- * Copyright since 2007 PrestaShop SA and Contributors
- * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Academic Free License 3.0 (AFL-3.0)
- * that is bundled with this package in the file LICENSE.md.
- * It is also available through the world-wide-web at this URL:
- * https://opensource.org/licenses/AFL-3.0
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@prestashop.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
- * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to https://devdocs.prestashop.com/ for more information.
- *
- * @author    PrestaShop SA and Contributors <contact@prestashop.com>
- * @copyright Since 2007 PrestaShop SA and Contributors
- * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
- *}
-<div class="product-variants js-product-variants">
-    {foreach from=$groups key=id_attribute_group item=group}
-        {if !empty($group.attributes)}
-            <div class="clearfix product-variants-item">
-      <span class="control-label">{$group.name}{l s=': ' d='Shop.Theme.Catalog'}
-          {foreach from=$group.attributes key=id_attribute item=group_attribute}
-              {if $group_attribute.selected}{$group_attribute.name}{/if}
-          {/foreach}
-      </span>
-                {if $group.group_type == 'select'}
-                    <select
-                            class="form-control form-control-select"
-                            id="group_{$id_attribute_group}"
-                            aria-label="{$group.name}"
-                            data-product-attribute="{$id_attribute_group}"
-                            name="group[{$id_attribute_group}]">
-                        {foreach from=$group.attributes key=id_attribute item=group_attribute}
-                            <option value="{$id_attribute}"
-                                    title="{$group_attribute.name}"{if $group_attribute.selected} selected="selected"{/if}>{$group_attribute.name}</option>
-                        {/foreach}
-                    </select>
-                {elseif $group.group_type == 'color'}
-                    <ul id="group_{$id_attribute_group}">
-                        {foreach from=$group.attributes key=id_attribute item=group_attribute}
-                            <li class="float-xs-left input-container">
-                                <label aria-label="{$group_attribute.name}">
-                                    <input class="input-color" type="radio"
-                                           data-product-attribute="{$id_attribute_group}"
-                                           name="group[{$id_attribute_group}]" value="{$id_attribute}"
-                                           title="{$group_attribute.name}"{if $group_attribute.selected} checked="checked"{/if}>
-                                    <span
-                  {if $group_attribute.texture}
-                      class="color texture" style="background-image: url({$group_attribute.texture})"
-                  {elseif $group_attribute.html_color_code}
-                      class="color" style="background-color: {$group_attribute.html_color_code}"
-                  {/if}
-                ><span class="attribute-name sr-only">{$group_attribute.name}</span></span>
-                                </label>
-                            </li>
-                        {/foreach}
-                    </ul>
-                {elseif $group.group_type == 'radio'}
-                    <ul id="group_{$id_attribute_group}">
-                        {foreach from=$group.attributes key=id_attribute item=group_attribute}
-                            <li class="input-container float-xs-left">
-                                <label>
-                                    <input class="input-radio" type="radio"
-                                           data-product-attribute="{$id_attribute_group}"
-                                           name="group[{$id_attribute_group}]" value="{$id_attribute}"
-                                           title="{$group_attribute.name}"{if $group_attribute.selected} checked="checked"{/if}>
-                                    <span class="radio-label">{$group_attribute.name}</span>
-                                </label>
-                            </li>
-                        {/foreach}
-                    </ul>
-                {/if}
-                <a class="taille-cta"
-                   href="/content/8-guide-taille-sous-vêtements--mariner">Guide des tailles</a>
-            </div>
-        {/if}
-    {/foreach}
-</div>
+<img
+            src="https://mariner.nga-lab.com/img/cms/Y2304-1_1216x1216_b76fc74c-abda-43d3-946a-cd385bb1212d_832x832.jpg"
+            alt="" width="832" height="832"/>
+<p>
+    Le shorty est un style de sous-vêtement qui allie confort et tendance, il est la variété des underwears la plus
+    porté dans le monde occidental. De plus, chez Mariner le shorty est le modèle qui présente le plus de diversité, que
+    ce soit dans la forme, les couleurs et même les tailles, allant du S au XXL. Le shorty pour homme est devenu très
+    populaire grâce à ses propriétés de maintien (de par son élasticité) et de confort principalement. Il est devenu le
+    juste milieu entre le slip et le caleçon auprès des gentleman de notre société.</p>
+<p></p>
+<h2>Nos
+    différents modèles de shorty homme</h2>
+<p>
+    <strong>Nous proposons, en adéquation avec les idéaux de notre marque, des ensembles de modèles classiques dans des
+        couleurs plutôt sobres comme le noir, le blanc ou bleu marine. Ces shortys simples sont à l’image de Mariner
+        :</strong></p>
+<ul>
+    <li><a
+                href="https://www.mariner-underwear.com/collections/tous-les-shortys/products/shorty-uni-ceinture-rayee-marine">Le
+            shorty uni bleu marine</a> avec le logo Mariner
+    </li>
+    <li><a
+                href="https://www.mariner-underwear.com/collections/tous-les-shortys/products/copy-of-shorty-raye-en-microfibre-stretch-anthracite-ceinture-enrobee">Le
+            shorty rayé marine</a></li>
+</ul>
+<p></p>
+<p>
+    <strong>L’avantage principal de la gamme shorty homme de Mariner est de proposer une multitude de modèles et de
+        matières avec une variété évidente qui permettra à chacun de se démarquer et de s’identifier plus
+        personnellement à ses sous-vêtements:</strong></p>
+<ul>
+    <li>Un ensemble micromodal
+        stretch imprimé (jungle, Hawaï, fleurs)
+    </li>
+    <li>Des shortys unis avec une
+        palette de couleurs très large
+    </li>
+    <li>Des shortys rayés dans le
+        sens de la hauteur ou de la largeur sont disponibles dans de nombreuses déclinaisons de couleurs
+    </li>
+    <li><a
+                href="https://www.mariner-underwear.com/collections/tous-les-shortys/products/copy-of-lot-de-2-shortys-coton-stretch-bleu-uni-imprime">Des
+            shortys aux coutures apparentes</a></li>
+</ul>
+<p></p>
+<p>
+    <strong>Ces nombreux styles de sous-vêtements sont disponibles dans plusieurs variantes :</strong></p>
+<ul>
+    <li>Des modèles complètement
+        uniformes avec une bande de serrage supérieur confondue dans le shorty
+    </li>
+    <li>Des gammes de <a
+                href="https://www.mariner-underwear.com/collections/tous-les-shortys/products/shorty-long-ouvert-ceinture-jacquard-gris-chine">shortys
+            en coton ouverts</a> avec une poche frontale
+    </li>
+    <li>Des modèles de <a
+                href="https://www.mariner-underwear.com/collections/tous-les-shortys/products/copy-of-shorty-ceinture-tricotee-coton-stretch-marine">shortys
+            avec ceintures de maintien tricotées rayés</a></li>
+    <li>Des shortys avec ceintures
+        à l'effigie de Mariner
+    </li>
+</ul>
+<p></p>
+<p>
+    L’ensemble de nos offres sont disponibles dans une dizaine de couleurs et matières différentes. Comme vous l’aurez
+    compris, Mariner exploite toute sa créativité afin de proposer une diversité que nous estimons nécessaire pour que
+    vous puissiez vous sentir à votre aise dans vos sous-vêtements. Il existe également des variétés de shortys conçus à
+    partir de matières bios afin que les plus attentifs d’entre vous aux sujets environnementaux puissent également être
+    comblés.</p>
+<p></p>
+<h2>Les
+    offres de shortys homme</h2>
+<p>
+    Des lots sont disponibles en pack de 2 ou 3 unités avec une possibilité de cumuler l’achat de lots. Ces opérations
+    permettent évidemment de bénéficier d’une réduction de prix liée au nombre d’articles achetés.</p>

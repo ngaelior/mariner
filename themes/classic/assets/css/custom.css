@@ -172,7 +172,7 @@ h6, .h6 {
     background: rgba(4, 19, 34, .07);
 }
 
-p {
+p, strong, em, ul, li {
     color: #394867;
     font-family: 'BebasNeueProBook', Sans-serif;
     font-size: 1rem;
