@@ -36,6 +36,7 @@
 
 p, a {
     font-size: 1.2rem;
+    line-height: 1.2rem;
 }
 
 body {
@@ -55,27 +56,38 @@ body {
 }
 
 h1, .h1, #prestablogfront h1 {
-    font-size: 2.375rem
+    font-size: 2.375rem;
+    line-height: 2.375rem;
 }
 
 h2, .h2, #prestablogfront h2 {
-    font-size: 2.3125rem
+    font-size: 2.3125rem;
+    line-height: 2.3125rem;
+
 }
 
 h3, .h3, #prestablogfront h3 {
-    font-size: 2.125rem
+    font-size: 2.125rem;
+    line-height: 2.375rem;
+
 }
 
 h4, .h4, #prestablogfront h4 {
-    font-size: 2.125rem
+    font-size: 2.125rem;
+    line-height: 2.125rem;
+
 }
 
 h5, .h5, #prestablogfront h5 {
-    font-size: 2rem
+    font-size: 2rem;
+    line-height: 2 . rem;
+
 }
 
 h6, .h6, #prestablogfront h6 {
-    font-size: 1.9375rem
+    font-size: 1.9375rem;
+    line-height: 1.9375rem;
+
 }
 
 .c-white {
@@ -176,6 +188,7 @@ p, strong, em, ul, li {
     color: #394867;
     font-family: 'BebasNeueProBook', Sans-serif;
     font-size: 1rem;
+    line-height: 1.6rem;
 }
 
 #product h1 {
