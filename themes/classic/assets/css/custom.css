@@ -537,6 +537,18 @@ p {
 
 }
 
+#module-prestablog-blog .block-categories {
+    display: none;
+}
+
+#module-prestablog-blog #prestablogfront {
+    border: none;
+}
+
+#module-prestablog-blog .prestablogExtra {
+    display: none;
+}
+
 /** Product **/
 #wrapper .breadcrumb li::after {
     content: '>';
