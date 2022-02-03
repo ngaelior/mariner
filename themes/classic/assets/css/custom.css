@@ -547,11 +547,15 @@ p, strong, em, ul, li {
     font-weight: bold;
 }
 
+#module-prestablog-blog #prestablogfront {
+    border: none;
+}
+
 #module-prestablog-blog #prestablogfront h2, #module-prestablog-blog #prestablogfront h3, #module-prestablog-blog #prestablogfront h4,
 #module-prestablog-blog #prestablogfront h5, #module-prestablog-blog #prestablogfront h6 {
     text-align: left;
     border: none;
-    margin-left: 0;
+    margin: 20px 0;
 }
 
 #module-prestablog-blog #prestablogfront h2 {
