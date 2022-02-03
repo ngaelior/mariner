@@ -525,7 +525,10 @@ p {
 .page-cms #content {
     max-width: 800px;
     margin: auto;
-    
+}
+
+.page-cms #content video, .page-cms #content img {
+    max-width: 100%;
 }
 
 /** Product **/
@@ -782,7 +785,7 @@ input:focus, textarea:focus, select:focus {
 
 #contact .form-control-label {
     width: fit-content;
-    min-width: 115px;
+    min-width: 165px;
     text-align: left;
 }
 
