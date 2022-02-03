@@ -522,6 +522,12 @@ p {
     margin: 0 !important;
 }
 
+.page-cms #content {
+    max-width: 800px;
+    margin: auto;
+    
+}
+
 /** Product **/
 #wrapper .breadcrumb li::after {
     content: '>';
