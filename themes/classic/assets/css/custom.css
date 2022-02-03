@@ -520,11 +520,15 @@ p, strong, em, ul, li {
     padding: 50px 20px;
 }
 
+#html_block_4 .slick-track {
+    display: flex !important;
+}
+
 #html_block_4 .item {
     background: white;
     margin: 30px;
     padding: 25px;
-    min-height: 200px;
+    height: inherit !important;
 }
 
 #html_block_4 .item p {
