@@ -553,7 +553,12 @@ p, strong, em, ul, li {
     background: rgb(35, 35, 35);
 
 }
-
+#prestablogfont ul li {
+    color: black;
+}
+#module-prestablog-blog ul {
+    font-weight: bold;
+}
 #module-prestablog-blog #left-column {
     display: none;
 }
