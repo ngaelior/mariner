@@ -527,7 +527,7 @@ p {
     margin: auto;
 }
 
-.page-cms #content video, .page-cms #content img {
+.page-cms #content video, .page-cms #content img, .page-cms #content iframe {
     max-width: 100%;
 }
 
