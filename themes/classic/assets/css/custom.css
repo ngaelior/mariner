@@ -541,7 +541,7 @@ p, strong, em, ul, li {
     display: none;
 }
 
-#module-prestablog-blog a {
+#module-prestablog-blog #prestablogfront a {
     font-family: 'BebasNeueProBook', Sans-serif;
     font-size: 1rem;
     font-weight: bold;
