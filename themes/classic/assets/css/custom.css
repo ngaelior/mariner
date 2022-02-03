@@ -511,6 +511,11 @@ p {
     background: white;
     margin: 30px;
     padding: 25px;
+    min-height: 200px;
+}
+
+#html_block_4 .item p {
+    margin-top: 20px;
 }
 
 .bandeau-top .html_block {
