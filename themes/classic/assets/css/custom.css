@@ -531,6 +531,12 @@ p {
     max-width: 100%;
 }
 
+/** Blog **/
+#module-prestablog-blog .prestablog_more {
+    background: rgb(35, 35, 35);
+
+}
+
 /** Product **/
 #wrapper .breadcrumb li::after {
     content: '>';

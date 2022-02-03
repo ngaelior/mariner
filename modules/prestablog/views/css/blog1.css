@@ -1,0 +1,58 @@
+/**
+ * 2008 - 2020 (c) Prestablog
+ *
+ * MODULE PrestaBlog
+ *
+ * @author    Prestablog
+ * @copyright Copyright (c) permanent, Prestablog
+ * @license   Commercial
+ */
+#prestablog_menu_cat nav ul, img.logo_home {
+  list-style: none;
+  background: !important;
+}#prestablog_menu_cat nav ul li:hover {
+  background: !important;
+}#blog_list_1-7 .prestablog_more {
+  display: block;
+  background-color: !important;
+}#blog_list_1-7 a.blog_link:hover, #blog_list_1-7 .comments:hover, #blog_list_1-7 a.blog_link:hover::before, #blog_list_1-7 .comments:hover::before {
+  background-color: !important;
+  color: #fff;
+}#blog_list_1-7 .block_bas h3 a, #blog_list_1-7 .block_bas .h3title a {
+ color:!important;
+}#blog_list_1-7 p, .date_blog-cat {
+  margin: 12px 0px;
+  color: !important;
+}#prestablog_menu_cat nav ul li a, #prestablog_menu_cat nav ul li i {
+  color: !important;
+}#blog_list_1-7 a.blog_link, #blog_list_1-7 a.comments, .prestablog_more, #prestablogauthor a.blog_link {
+  color: !important;
+}#prestablogfont h1, #prestablogfont h2, #prestablogfont h3, #prestablogfont h4, #prestablogfont h5, #prestablogfont h6, #prestablog_article{
+  color:!important;
+}#prestablogfont p, #prestablogfont ul, #prestablogfont li {
+  color: !important;
+}.block-categories {
+  background: !important;
+}.block-categories a.link_block, .category-top-menu a {
+  color: !important;
+}.block-categories a.btn_link {
+  color: !important;
+}.title_block {
+  color: !important;
+}#prestablog_lastliste a.btn-primary, #prestablog_catliste a.btn-primary, #prestablog_dateliste a.btn-primary, #prestablog_block_rss a {
+  background-color: !important;
+}#prestablogfront, .prestablogExtra, #prestablog-fb-comments, #prestablog-comments, #prestablog-rating, #prestablogauthor, time.date span, .info_blog span {
+  background-color: !important;
+}#blog_list_1-7 .block_cont {
+  background-color: !important;
+}#blog_list_1-7 li:hover .block_cont {
+  background-color: !important;
+}#prestablog_lastliste a.btn-primary:hover, #prestablog_catliste a.btn-primary:hover, #prestablog_dateliste a.btn-primary:hover, #prestablog_block_rss a:hover {
+  background-color: !important;
+}div.prestablog_pagination span.current {
+  background-color: !important;
+}div.prestablog_pagination span.current {
+  color: !important;
+}div.prestablog_pagination span.current {
+  border: 1px solid !important;
+}
