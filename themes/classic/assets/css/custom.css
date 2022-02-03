@@ -554,8 +554,13 @@ p, strong, em, ul, li {
 
 }
 
-#module-prestablog-blog .block-categories {
+#module-prestablog-blog #left-column {
     display: none;
+}
+
+#module-prestablog-blog #content-wrapper {
+    margin: auto;
+    float: none;
 }
 
 #module-prestablog-blog #prestablogfront a {
