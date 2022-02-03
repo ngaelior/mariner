@@ -54,27 +54,27 @@ body {
     font-family: 'Bebas Neue Pro Bold', serif;
 }
 
-h1, .h1 {
+h1, .h1, #prestablogfront h1 {
     font-size: 2.375rem
 }
 
-h2, .h2 {
+h2, .h2, #prestablogfront h2 {
     font-size: 2.3125rem
 }
 
-h3, .h3 {
+h3, .h3, #prestablogfront h3 {
     font-size: 2.125rem
 }
 
-h4, .h4 {
+h4, .h4, #prestablogfront h4 {
     font-size: 2.125rem
 }
 
-h5, .h5 {
+h5, .h5, #prestablogfront h5 {
     font-size: 2rem
 }
 
-h6, .h6 {
+h6, .h6, #prestablogfront h6 {
     font-size: 1.9375rem
 }
 
@@ -556,10 +556,6 @@ p, strong, em, ul, li {
     text-align: left;
     border: none;
     margin: 20px 0;
-}
-
-#module-prestablog-blog #prestablogfront h2 {
-    font-size: 2rem;
 }
 
 #module-prestablog-blog .prestablogExtra {
