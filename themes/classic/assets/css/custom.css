@@ -791,6 +791,18 @@ input:focus, textarea:focus, select:focus {
     margin: auto;
 }
 
+#product .product-variants-item select.form-control:not([size]):not([multiple]) {
+    display: inline;
+}
+
+.taille-cta {
+    margin-left: 20px;
+    color: black;
+    text-decoration: underline;
+    font-family: 'BebasNeueProBook', Sans-serif;
+    font-size: 1rem;
+}
+
 @media only screen and (min-width: 768px) {
     #header .header-top a {
         color: #022C59 !important;
