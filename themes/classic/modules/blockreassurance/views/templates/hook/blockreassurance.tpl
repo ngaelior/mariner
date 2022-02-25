@@ -24,7 +24,6 @@
  *}
 {if $elements}
     <div id="block-reassurance">
-        <h1 style="display: none">Mariner, caleçons et sous-vêtements pour homme</h1>
         <ul>
             {foreach from=$elements item=element}
                 <li class="border-none pt-0">
