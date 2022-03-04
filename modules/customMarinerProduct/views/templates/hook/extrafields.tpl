@@ -1,5 +1,5 @@
 <div class="m-b-1 m-t-1">
-    <h2>Achile personnalisation avancée</h2>
+    <h2>Mariner personnalisation avancée</h2>
 
     <fieldset class="form-group">
         <div class="col-lg-12 col-xl-4">
@@ -17,7 +17,7 @@
     <div class="custom image">
         {* Affichage du champ Image *}
         <div class="col-lg-12 col-xl-12">
-            <label class="form-control-label">Image partie droite</label>
+            <label class="form-control-label">Image partie Gauche</label>
 
             <div id="custom_field_file_thumbnail">
                 {* Si une image existe déjà sur le produit *}
@@ -89,7 +89,7 @@
     <div class="custom image">
         {* Affichage du champ Image *}
         <div class="col-lg-12 col-xl-12">
-            <label class="form-control-label">Image bas</label>
+            <label class="form-control-label">Image partie droite</label>
 
             <div id="custom_field_file_thumbnail2">
                 {* Si une image existe déjà sur le produit *}
