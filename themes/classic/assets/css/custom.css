@@ -553,12 +553,15 @@ p, strong, em, ul, li {
     background: rgb(35, 35, 35);
 
 }
+
 #prestablogfont ul li {
     color: black;
 }
+
 #module-prestablog-blog ul {
     font-weight: bold;
 }
+
 #module-prestablog-blog #left-column {
     display: none;
 }
@@ -617,6 +620,10 @@ p, strong, em, ul, li {
 .block-category {
     min-height: unset;
     height: fit-content;
+}
+
+.text-muted h1 {
+    color: rgb(35, 35, 35);
 }
 
 #product .product-description p {
