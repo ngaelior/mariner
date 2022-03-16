@@ -133,8 +133,8 @@
                                 {block name='product_description'}
                                     {if strlen($product.description) > 150}
                                         <div data-js-id="description"
-                                             data-content-short="{$product.description|truncate:150 nofilter}"
-                                             data-content="{$product.description}"
+                                             data-content-short="{$product.description|truncate:150|@json_encode}"
+                                             data-content="{$product.description|@json_encode}"
                                              class="product-description">{$product.description|truncate:150 nofilter}</div>
                                         <p data-js-id="see-more"
                                            style=" font-size.7rem;font-weight: bold;text-decoration: underline;cursor: pointer">
@@ -151,12 +151,12 @@
                                           button.addEventListener('click', () => {
                                             button.style.display = 'none'
                                             buttonLess.style.display = 'block'
-                                            content.innerHTML = content.getAttribute('data-content')
+                                            content.innerHTML = JSON.parse(content.getAttribute('data-content'))
                                           })
                                           buttonLess.addEventListener('click', () => {
                                             buttonLess.style.display = 'none'
                                             button.style.display = 'block'
-                                            content.innerHTML = content.getAttribute('data-content-short')
+                                            content.innerHTML = JSON.parse(content.getAttribute('data-content-short'))
                                           })
                                         </script>
                                     {else}
