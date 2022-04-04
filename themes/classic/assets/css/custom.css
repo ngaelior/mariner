@@ -432,6 +432,11 @@ p, strong, em, ul, li {
     background: none;
 }
 
+#header .header-nav  {
+    display: flex;
+    margin-bottom: 30px;
+}
+
 .header-icons .user-info {
     margin-top: 5px;
 }
