@@ -432,7 +432,7 @@ p, strong, em, ul, li {
     background: none;
 }
 
-#header .header-nav  {
+#header .header-nav {
     display: flex;
     margin-bottom: 30px;
 }
@@ -888,6 +888,46 @@ input:focus, textarea:focus, select:focus {
     font-size: 1rem;
 }
 
+.payment-options .payment-option {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+}
+
+.payment-options .payment-option label {
+    font-size: 20px;
+    display: flex !important;
+    margin: 0 10px;
+    align-items: center;
+}
+
+.payment-options .payment-option label span {
+    margin-right: 10px;
+}
+
+.payment-options .payment-option .custom-radio {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#conditions-to-approve label {
+    font-size: 18px;
+}
+
+.payment-options .payment-option label img[src*="systempay"] {
+    max-width: 125px;
+    width: 125px;
+    max-height: unset;
+    height: auto;
+}
+
+.payment-options .payment-option label img[src*="paypal"] {
+    max-width: 60px;
+    width: 125px;
+    max-height: unset;
+    height: auto;
+}
+
 @media only screen and (min-width: 768px) {
     #header .header-top a {
         color: #022C59 !important;
@@ -921,10 +961,14 @@ input:focus, textarea:focus, select:focus {
         width: calc(50% - 40px);
     }
 
-
     .logo.img-fluid, #header .logo {
         margin-top: -80px;
         max-width: 140%;
+    }
+
+    body#checkout header .logo.img-fluid, #header .logo {
+        margin-top: 0;
+        margin-left: 20px;
     }
 
     #search_widget {
@@ -1081,10 +1125,6 @@ form .form-control-label {
         color: #394867;
     }
 
-    #pshomeslider .carousel-item {
-        background-size: cover;
-    }
-
     #pshomeslider .pshomeslider-height {
         height: 35vh;
     }
@@ -1104,6 +1144,11 @@ form .form-control-label {
     #pshomeslider .pshomeslider-height {
         height: 45vh;
     }
+
+    #pshomeslider .carousel-item {
+        background-size: cover;
+    }
+
 
 }
 
