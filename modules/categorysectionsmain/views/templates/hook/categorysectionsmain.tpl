@@ -42,7 +42,7 @@
         <div class="col-xs-12 col-lg-6 bg-primary bg-light-dark ">
             <h2 class="c-yellow italic">DECOUVRIR LA NOUVELLE COLLECTION</h2>
             <p class="c-white">Une nouvelle gamme de shortys, de pyjamas et de sous-vêtements</p>
-            <a style="display: block;width: fit-content; text-align: center" href="#" class="mariner-button">Je découvre
+            <a style="display: block;width: fit-content; text-align: center" href="/190-collection-printemps-eté-2022" class="mariner-button">Je découvre
                 la nouvelle
                 collection</a>
         </div>

@@ -25,23 +25,29 @@
 {extends file='page.tpl'}
 
 {block name='page_title'}
-  {$cms.meta_title}
+    {$cms.meta_title}
 {/block}
+{if $cms.content|strstr:"<h1"}
+    {block name='page_header_container'}
+        {block name='page_title' hide}
+        {/block}
+    {/block}
+{/if}
 
 {block name='page_content_container'}
-  <section id="content" class="page-content page-cms page-cms-{$cms.id}">
+    <section id="content" class="page-content page-cms page-cms-{$cms.id}">
 
-    {block name='cms_content'}
-      {$cms.content nofilter}
-    {/block}
+        {block name='cms_content'}
+            {$cms.content nofilter}
+        {/block}
 
-    {block name='hook_cms_dispute_information'}
-      {hook h='displayCMSDisputeInformation'}
-    {/block}
+        {block name='hook_cms_dispute_information'}
+            {hook h='displayCMSDisputeInformation'}
+        {/block}
 
-    {block name='hook_cms_print_button'}
-      {hook h='displayCMSPrintButton'}
-    {/block}
+        {block name='hook_cms_print_button'}
+            {hook h='displayCMSPrintButton'}
+        {/block}
 
-  </section>
+    </section>
 {/block}

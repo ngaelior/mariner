@@ -966,7 +966,7 @@ input:focus, textarea:focus, select:focus {
         max-width: 140%;
     }
 
-    body#checkout header .logo.img-fluid, #header .logo {
+    body#checkout header .logo.img-fluid #header .logo {
         margin-top: 0;
         margin-left: 20px;
     }
